@@ -1,58 +1,52 @@
 package member.service;
 
-import member.dto.MemberDto.FidnUserEmailBynameAndTelInput;
-import member.dto.MemberDto.FidnUserEmailBynameAndTelOutput;
-import member.dto.MemberDto.FindUserPasswordByEmailAndNameInput;
-import member.dto.MemberDto.FindUserPasswordByEmailAndNameOutput;
-import member.dto.MemberDto.LoginMemberInput;
-import member.dto.MemberDto.LoginMemberOutput;
-import member.dto.MemberDto.LogoutInput;
-import member.dto.MemberDto.LogoutOutput;
-import member.dto.MemberDto.RegisterMemberInput;
-import member.dto.MemberDto.RegisterMemberOutput;
-import member.dto.MemberDto.RestrictBookInput;
-import member.dto.MemberDto.RestrictBookOutput;
-import member.dto.MemberDto.UpdateMemberInfoForMemInput;
-import member.dto.MemberDto.UpdateMemberInfoForMemOutput;
-import member.dto.MemberDto.ViewAllMembersInfoByNameInput;
-import member.dto.MemberDto.ViewAllMembersInfoByNameOutput;
-import member.dto.MemberDto.ViewMemberInfoForMemInput;
-import member.dto.MemberDto.ViewMemberInfoForMemOutput;
-import member.dto.MemberDto.ViewOverdueMembersInput;
-import member.dto.MemberDto.ViewOverdueMembersOutput;
+import member.dto.MemberDto.FidnUserEmailBynameAndTelInputDto;
+import member.dto.MemberDto.FidnUserEmailBynameAndTelOutputDto;
+import member.dto.MemberDto.FindUserPasswordByEmailAndNameInputDto;
+import member.dto.MemberDto.FindUserPasswordByEmailAndNameOutputDto;
+import member.dto.MemberDto.LoginMemberInputDto;
+import member.dto.MemberDto.LoginMemberOutputDto;
+import member.dto.MemberDto.RegisterMemberInputDto;
+import member.dto.MemberDto.RestrictBookInputDto;
+import member.dto.MemberDto.RestrictBookOutputDto;
+import member.dto.MemberDto.UpdateMemberInfoForMemInputDto;
+import member.dto.MemberDto.ViewAllMembersInfoByNameInputDto;
+import member.dto.MemberDto.ViewAllMembersInfoByNameOutputDto;
+import member.dto.MemberDto.ViewMemberInfoForMemInputDto;
+import member.dto.MemberDto.ViewMemberInfoForMemOutputDto;
+import member.dto.MemberDto.ViewOverdueMembersInputDto;
+import member.dto.MemberDto.ViewOverdueMembersOutputDto;
 
 public interface MemberService {
 	
-	RegisterMemberOutput register(RegisterMemberInput registermember );
+	void RegisterMember(RegisterMemberInputDto registermember );
 	
 	
-	UpdateMemberInfoForMemOutput updateMemInfo(UpdateMemberInfoForMemInput updatemember );
+	void UpdateMemberInfoForMem(UpdateMemberInfoForMemInputDto updatemember );
 	
 	
-	ViewMemberInfoForMemOutput viewMemInfo(ViewMemberInfoForMemInput viewmember);
+	ViewMemberInfoForMemOutputDto viewMemberInfoForMem(ViewMemberInfoForMemInputDto viewmember);
 	
 	
-	ViewAllMembersInfoByNameOutput viewAllMem(ViewAllMembersInfoByNameInput viewallmember);
+	ViewAllMembersInfoByNameOutputDto viewAllMembersInfoByName(ViewAllMembersInfoByNameInputDto viewallmember);
 	
 	
-	ViewOverdueMembersOutput viewOverMem(ViewOverdueMembersInput viewovermember);
+	ViewOverdueMembersOutputDto viewOverdueMembers(ViewOverdueMembersInputDto viewovermember);
 	
 	
-	RestrictBookOutput restirctBook(RestrictBookInput restirct);
+	RestrictBookOutputDto restrictBook(RestrictBookInputDto restirct);
 	
 	
-	LoginMemberOutput loginMem(LoginMemberInput login);
+	LoginMemberOutputDto loginMember(LoginMemberInputDto login);
 	
 	
-	LogoutOutput logoutMem(LogoutInput logout);
+	void Logout();
 	
 	
-	FidnUserEmailBynameAndTelOutput findUserID(FidnUserEmailBynameAndTelInput userid);
+	FidnUserEmailBynameAndTelOutputDto FidnUserEmailBynameAndTel(FidnUserEmailBynameAndTelInputDto userid);
 	
 	
-	FindUserPasswordByEmailAndNameOutput findUserPassword(FindUserPasswordByEmailAndNameInput userpassword);
-	
-	
-	
+	FindUserPasswordByEmailAndNameOutputDto FindUserPasswordByEmailAndName(FindUserPasswordByEmailAndNameInputDto userpassword);
+		
 	
 }

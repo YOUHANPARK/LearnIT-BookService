@@ -7,7 +7,7 @@ public class MemberDto {
 	/**
 	 * 회원가입 Input
 	 */
-	public static class RegisterMemberInput{
+	public static class RegisterMemberInputDto{
 		String name;
 		String tel;
 		String addr;
@@ -15,19 +15,13 @@ public class MemberDto {
 		int password;
 		String category;	
 	}
-	/**
-	 * 회원가입 output
-	 */
-	public static class RegisterMemberOutput{
-		
-	}
 	
 	
 	
 	/**
 	 * 회원정보수정(회원, 관리자) Input
 	 */
-	public static class UpdateMemberInfoForMemInput{	
+	public static class UpdateMemberInfoForMemInputDto{	
 		String name;
 		String tel;
 		String addr;
@@ -36,25 +30,20 @@ public class MemberDto {
 		String category;
 		long user_seq;	
 	}
-	/**
-	 * 회원정보수정(회원, 관리자) output
-	 */
-	public static class UpdateMemberInfoForMemOutput{		
-		
-	}
+	
 	
 	
 	
 	/**
 	 * 회원정보조회(회원, 관리자) Input
 	 */
-	public static class ViewMemberInfoForMemInput{
+	public static class ViewMemberInfoForMemInputDto{
 		long userSeq;	
 	}
 	/**
 	 * 회원정보조회(회원, 관리자) output
 	 */
-	public static class ViewMemberInfoForMemOutput{
+	public static class ViewMemberInfoForMemOutputDto{
 		String name;
 		String tel;
 		String addr;
@@ -67,13 +56,13 @@ public class MemberDto {
 	/**
 	 * 회원정보모두조회(관리자) input
 	 */
-	public static class ViewAllMembersInfoByNameInput{
+	public static class ViewAllMembersInfoByNameInputDto{
 		long userSeq;
 	}
 	/**
 	 * 회원정보모두조회(관리자) output
 	 */
-	public static class ViewAllMembersInfoByNameOutput{
+	public static class ViewAllMembersInfoByNameOutputDto{
 		String name;
 		String tel;
 		String addr;
@@ -86,13 +75,13 @@ public class MemberDto {
 	/**
 	 * 연체자조회 Input
 	 */
-	public static class ViewOverdueMembersInput{
+	public static class ViewOverdueMembersInputDto{
 		long userSeq;
 	}
 	/**
 	 * 연체자조회 Output
 	 */
-	public static class ViewOverdueMembersOutput{
+	public static class ViewOverdueMembersOutputDto{
 		String name;
 		String tel;
 		String addr;
@@ -103,13 +92,13 @@ public class MemberDto {
 	/**
 	 * 도서제한 Input
 	 */
-	public static class RestrictBookInput{
+	public static class RestrictBookInputDto{
 		long userSeq;
 	}
 	/**
 	 * 도서제한 Output
 	 */
-	public static class RestrictBookOutput{
+	public static class RestrictBookOutputDto{
 		int restrictDate;
 	}
 	
@@ -117,14 +106,14 @@ public class MemberDto {
 	/**
 	 * 로그인 Input
 	 */
-	public static class LoginMemberInput{
+	public static class LoginMemberInputDto{
 		String id;
 		int password;
 	}
 	/**
 	 * 로그인 Output
 	 */
-	public static class LoginMemberOutput{
+	public static class LoginMemberOutputDto{
 		long userSeq;
 		boolean isAdmin;		
 	}
@@ -133,28 +122,23 @@ public class MemberDto {
 	/**
 	 * 로그아웃 Input
 	 */
-	public static class LogoutInput{
+	public static class LogoutInputDto{
 		
 	}
-	/**
-	 * 로그아웃 Output
-	 */
-	public static class LogoutOutput{
-		
-	}
+	
 	
 	
 	/**
 	 * ID찾기 Input
 	 */
-	public static class FidnUserEmailBynameAndTelInput{
+	public static class FidnUserEmailBynameAndTelInputDto{
 		String name;
 		String tel;
 	}
 	/**
 	 * ID찾기 Output
 	 */
-	public static class FidnUserEmailBynameAndTelOutput{
+	public static class FidnUserEmailBynameAndTelOutputDto{
 		String email;
 	}
 	
@@ -163,14 +147,14 @@ public class MemberDto {
 	/**
 	 * Password찾기 Input
 	 */
-	public static class FindUserPasswordByEmailAndNameInput{
+	public static class FindUserPasswordByEmailAndNameInputDto{
 		String email;
 		String name;
 	}
 	/**
 	 * Password찾기 Output
 	 */
-	public static class FindUserPasswordByEmailAndNameOutput{
+	public static class FindUserPasswordByEmailAndNameOutputDto{
 		int password;
 	}
 }
