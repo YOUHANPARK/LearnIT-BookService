@@ -1,9 +1,11 @@
 package book.service;
 
 import  book.dto.BookDto;
+import book.dto.BookDto.SearchBookByTitleInput;
+import book.dto.BookDto.SearchBookByTitleOutput;
 
 public interface BookService {
 	
-	BookDto.searchBookByTitleOutput searchBookByTitle(BookDto.searchBookByTitleInput) ;
+	SearchBookByTitleOutput searchBookByTitle(SearchBookByTitleInput er);
 	
 }
