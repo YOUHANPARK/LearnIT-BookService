@@ -14,10 +14,63 @@ public class BookDto {
 	public static class SearchBookByTitleOutputDto {
 		long bookseq;
 		String title;
-		int booknum;
+		String booknum;
 		String publisher;
 		String author;
 		boolean bookposb;
+		
+		
+		public SearchBookByTitleOutputDto() {
+			super();
+		}
+		public SearchBookByTitleOutputDto(long bookseq, String title, String booknum, String publisher, String author,
+				boolean bookposb) {
+			super();
+			this.bookseq = bookseq;
+			this.title = title;
+			this.booknum = booknum;
+			this.publisher = publisher;
+			this.author = author;
+			this.bookposb = bookposb;
+		}
+		public long getBookseq() {
+			return bookseq;
+		}
+		public void setBookseq(long bookseq) {
+			this.bookseq = bookseq;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getBooknum() {
+			return booknum;
+		}
+		public void setBooknum(String booknum) {
+			this.booknum = booknum;
+		}
+		public String getPublisher() {
+			return publisher;
+		}
+		public void setPublisher(String publisher) {
+			this.publisher = publisher;
+		}
+		public String getAuthor() {
+			return author;
+		}
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+		public boolean isBookposb() {
+			return bookposb;
+		}
+		public void setBookposb(boolean bookposb) {
+			this.bookposb = bookposb;
+		}
+		
+		
 		
 		
 	}

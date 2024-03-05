@@ -5,13 +5,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import book.dao.BookDAO;
+import book.dao.BookDAOImpl;
+import book.service.BookService;
+import book.service.impl.BookServiceImpl;
+
 public class AppConfig {
+	private final BookService bookService;
+	private final BookDAO bookDAO;
+	
+	
+	public AppConfig(){
+		this.bookDAO = new BookDAOImpl();
+		this.bookService = new BookServiceImpl(bookDAO);
+	}
+	
+	public BookService getBookService() {
+		return bookService;
+	}
+
+
+
+
+	public BookDAO getBookDAO() {
+		return bookDAO;
+	}
+	
+	
+
 	
 	public class DBUtil{
 		
 		public interface DbProperties{
 			public static final String DRIVER_NAME="oracle.jdbc.driver.OracleDriver";
-			String URL = "jdbc:oracle:thin:192.168.0.28:1521:xe";
+			String URL = "jdbc:oracle:thin:@192.168.0.28:1521:xe";
 			String USER_ID = "c##library_member";
 			String USER_PASS = "1234";
 		}

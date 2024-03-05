@@ -3,6 +3,7 @@ package book.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import book.dto.Book;
 import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
@@ -35,8 +36,6 @@ import book.dto.BookDto.ViewLoanHistoryInputDto;
 import book.dto.BookDto.ViewLoanHistoryOutputDto;
 
 public interface BookDAO {
-	
-	
 	
 //	List<SearchBookByTitleOutputDto> searchBookByTitle(SearchBookByTitleInputDto ip) throws SQLException;
 //	
@@ -75,5 +74,7 @@ public interface BookDAO {
 //	List<ViewLoanHistoryOutputDto> ViewLoanHistory(ViewLoanHistoryInputDto ip) throws SQLException;
 //	
 //	List<RecommendBookOutputDto> RecommendBook(RecommendBookInputDto ip) throws SQLException;
+	
+	List<Book> findAllBook();
 	
 }
