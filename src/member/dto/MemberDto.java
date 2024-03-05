@@ -117,15 +117,7 @@ public class MemberDto {
 		long userSeq;
 		boolean isAdmin;		
 	}
-	
-	
-	/**
-	 * 로그아웃 Input
-	 */
-	public static class LogoutInputDto{
-		
-	}
-	
+
 	
 	
 	/**
