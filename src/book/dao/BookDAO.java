@@ -1,39 +1,9 @@
 package book.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import book.dto.Book;
-import book.dto.BookDto.AddFavoriteBookInputDto;
-import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
-import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
-import book.dto.BookDto.DeleteBookInputDto;
-import book.dto.BookDto.DeleteFavoriteBookInputDto;
-import book.dto.BookDto.ExtendBookLoanBySeqInputDto;
-import book.dto.BookDto.ExtendBookLoanBySeqOutputDto;
-import book.dto.BookDto.ManageBookRequestInputDto;
-import book.dto.BookDto.ManageBookRequestOutputDto;
-import book.dto.BookDto.RateBookInputDto;
-import book.dto.BookDto.RecommendBookInputDto;
-import book.dto.BookDto.RecommendBookOutputDto;
-import book.dto.BookDto.RegisterBookRequestedInputDto;
-import book.dto.BookDto.RegisterBookUnrequestedInputDto;
-import book.dto.BookDto.RequestBookInputDto;
-import book.dto.BookDto.ReturnBookBySeqInputDto;
-import book.dto.BookDto.ReturnBookBySeqOutputDto;
-import book.dto.BookDto.SearchBookByCategoryInputDto;
-import book.dto.BookDto.SearchBookByCategoryOutputDto;
-import book.dto.BookDto.SearchBookBySeqInputDto;
-import book.dto.BookDto.SearchBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
-import book.dto.BookDto.SearchBookByTitleOutputDto;
-import book.dto.BookDto.UpdateBookBySeqInputDto;
-import book.dto.BookDto.ViewBookRequestsInputDto;
-import book.dto.BookDto.ViewBookRequestsOutputDto;
-import book.dto.BookDto.ViewFavoriteBookInputDto;
-import book.dto.BookDto.ViewFavoriteBookOutputDto;
-import book.dto.BookDto.ViewLoanHistoryInputDto;
-import book.dto.BookDto.ViewLoanHistoryOutputDto;
 
 public interface BookDAO {
 	
@@ -76,5 +46,6 @@ public interface BookDAO {
 //	List<RecommendBookOutputDto> RecommendBook(RecommendBookInputDto ip) throws SQLException;
 	
 	List<Book> findAllBook();
+	List<Book> findTitleBook(SearchBookByTitleInputDto searchbook);
 	
 }

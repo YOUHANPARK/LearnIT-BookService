@@ -85,6 +85,10 @@ public class MenuView {
 	}
 	
 	/**
+	 * 
+	 */
+	
+	/**
 	 * 회원 메뉴
 	 */
 	public static void printUserMenu() {
@@ -92,7 +96,7 @@ public class MenuView {
 
 			System.out.println(
 					"******************************************회원 로그인******************************************");
-			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회");
+			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회   |   7. 로그아웃");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -114,6 +118,9 @@ public class MenuView {
 
 			case 6:
 				// 회원정보 조회
+				break;
+				
+			case 7:
 				break;
 			}
 		}
@@ -237,7 +244,7 @@ public class MenuView {
 		while (true) {
 			System.out
 			.println("******************************************관리자 로그인******************************************");
-			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서관리   |   5. 관심도서   |   6. 연체자 관리   |   7. 회원정보 조회");
+			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서관리   |   5. 관심도서   |   6. 연체자 관리   |   7. 회원정보 조회   |   8. 로그아웃");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -263,6 +270,9 @@ public class MenuView {
 				
 			case 7:
 				MenuView.adminInfoMenu();// 관리자의 회원정보 조회
+				break;
+			
+			case 8:
 				break;
 			}
 		}
