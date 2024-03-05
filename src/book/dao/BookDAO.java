@@ -1,4 +1,4 @@
-package dao;
+package book.dao;
 
 public interface BookDAO {
 

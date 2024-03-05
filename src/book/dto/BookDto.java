@@ -3,6 +3,9 @@ package book.dto;
 import java.util.Date;
 
 public class BookDto {
+	/**
+	 * 도서검색 
+	 */
 	
 	public static class SearchBookByTitleInputDto{
 		String title;
