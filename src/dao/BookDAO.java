@@ -1,5 +1,5 @@
 package dao;
 
-public class BookDAO {
+public interface BookDAO {
 
 }
