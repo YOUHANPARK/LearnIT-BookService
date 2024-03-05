@@ -19,9 +19,20 @@ public class Book {
 	public Book() {
 		super();
 	}
+	
+	public Book(long bookseq, String title, String callnum, String publisher,
+			String author, int loanposb) {
+		this.bookseq = bookseq;
+		this.title = title;
+		this.callnum = callnum;
+		this.publisher = publisher;
+		this.author = author;
+		this.loanposb = loanposb;
+	}
 
 	public Book(long bookseq, String title, String callnum, String publisher,
 			String author, String intro, int loanposb, Date pubyear, String category){
+		
 		this.bookseq = bookseq;
 		this.title = title;
 		this.callnum = callnum;

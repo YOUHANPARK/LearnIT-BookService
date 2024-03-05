@@ -1,4 +1,4 @@
-import book.dto.BookDto.SearchBookByTitleOutputDto;
+import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.service.BookService;
 import config.AppConfig;
 
@@ -15,6 +15,7 @@ public class MainApp {
 		
 		BookService bs =  ac.getBookService();
 		System.out.println("tlfgod");
-		System.out.println(bs.SearchBookByTitle(null).toArray()[0].toString());
+		//System.out.println(bs.findAllBook(null).toArray()[0].toString());
+		bs.SearchBookByTitle(new SearchBookByTitleInputDto());
 	}
 }

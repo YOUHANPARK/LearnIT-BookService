@@ -52,29 +52,29 @@ public class BookServiceImpl implements BookService{
 	
 	@Override
 	public List<SearchBookByTitleOutputDto> SearchBookByTitle(SearchBookByTitleInputDto ip) {
-		// TODO Auto-generated method stub
+		ip.setTitle("마인크래프트");
 		List<SearchBookByTitleOutputDto> result = new ArrayList<>();
-		
-		bookDAO.findAllBook().forEach(b -> result.add(new SearchBookByTitleOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), true)));
-		
+		bookDAO.findTitleBook(ip).forEach(b -> result.add(new SearchBookByTitleOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), true)));
 		return result;
 	}
 
 	@Override
 	public List<SearchBookByCategoryOutputDto> SearchBookByCategory(SearchBookByCategoryInputDto ip) {
-		// TODO Auto-generated method stub
-		return null;
+		List<SearchBookByCategoryOutputDto> result = new ArrayList<>();
+		//bookDAO.findCategoryBook(ip).forEach(b->result.add(new SearchBookByCategoryOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), true)));
+		return result;
 	}
 
 	@Override
 	public SearchBookBySeqOutputDto SearchBookBySeq(SearchBookBySeqInputDto ip) {
-		// TODO Auto-generated method stub
-		return null;
+		SearchBookBySeqOutputDto result = new SearchBookBySeqOutputDto();
+		//result = bookDAO.findSeqBook(ip);
+		return result;
 	}
 
 	@Override
 	public void AddFavoriteBook(AddFavoriteBookInputDto ip) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

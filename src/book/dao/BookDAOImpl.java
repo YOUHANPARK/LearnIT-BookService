@@ -49,17 +49,23 @@ public class BookDAOImpl implements BookDAO{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Book> booklist = new ArrayList<>();
-		String sql = "select * from 책 where book_title like ?";
+		String sql = "select book_seq, book_title, call_number, publisher, author, loan_possible from 책 where book_title like ?";
 		
 		try { 
 			con = AppConfig.DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			
-			ps.setString(1,searchbook.getTitle());
-			
+			//System.out.println(searchbook.getTitle());
+			ps.setString(1,"%"+searchbook.getTitle()+"%");
 			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book(rs.getLong(1),rs.getString(2),rs.getString(3),
+						rs.getString(4),rs.getString(5),rs.getInt(6));
+				booklist.add(book);
+				//System.out.println(book.getTitle());
+			}
 				
-		}catch(SQLException e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBUtil.DbClose(con, ps, rs);
