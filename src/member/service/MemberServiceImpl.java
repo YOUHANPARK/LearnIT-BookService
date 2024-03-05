@@ -1,4 +1,4 @@
-package member.service.impl;
+package member.service;
 
 public class MemberServiceImpl {
 
