@@ -35,7 +35,7 @@ import book.dto.BookDto.ViewLoanHistoryOutputDto;
 
 public interface BookService {
 	
-	List<SearchBookByTitleOutputDto> searchBookByTitle(SearchBookByTitleInputDto ip);
+	List<SearchBookByTitleOutputDto> SearchBookByTitle(SearchBookByTitleInputDto ip);
 	
 	List<SearchBookByCategoryOutputDto> SearchBookByCategory(SearchBookByCategoryInputDto ip);
 	
