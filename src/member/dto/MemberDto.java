@@ -197,7 +197,7 @@ public class MemberDto {
 		public String getCategory() {
 			return category;
 		}
-		
+
 		// Setters
 		public void setName(String name) {
 			this.name = name;
@@ -255,6 +255,7 @@ public class MemberDto {
 		public long getUserSeq() {
 			return userSeq;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -312,8 +313,9 @@ public class MemberDto {
 
 	public static class ViewOverdueMembersInputDto {
 		private long userSeq;
-
+		
 		// Getter
+
 		public long getUserSeq() {
 			return userSeq;
 		}
@@ -330,11 +332,12 @@ public class MemberDto {
 		private String tel;
 		private String addr;
 		private String email;
-		
+
 		// Getters
 		public long getUserSeq() {
 			return userSeq;
 		}
+
 		public String getName() {
 			return name;
 		}
@@ -353,8 +356,9 @@ public class MemberDto {
 
 		// Setters
 		public void setUserSeq(long userSeq) {
-		    this.userSeq = userSeq;
+			this.userSeq = userSeq;
 		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
@@ -370,7 +374,7 @@ public class MemberDto {
 		public void setEmail(String email) {
 			this.email = email;
 		}
-		
+
 	}
 
 	public static class RestrictBookLoanInputDto {
@@ -436,8 +440,8 @@ public class MemberDto {
 		public boolean isAdmin() {
 			return isAdmin;
 		}
-		
-		//Setters
+
+		// Setters
 		public void setUserSeq(long userSeq) {
 			this.userSeq = userSeq;
 		}
@@ -445,8 +449,7 @@ public class MemberDto {
 		public void setAdmin(boolean isAdmin) {
 			this.isAdmin = isAdmin;
 		}
-		
-		
+
 	}
 
 	public static class FindUserEmailBynameAndTelInputDto {
@@ -479,8 +482,8 @@ public class MemberDto {
 		public String getEmail() {
 			return email;
 		}
-		
-		//Setter
+
+		// Setter
 		public void setEmail(String email) {
 			this.email = email;
 		}
@@ -516,7 +519,8 @@ public class MemberDto {
 		public int getPassword() {
 			return password;
 		}
-		//Setter
+
+		// Setter
 		public void setPassword(int password) {
 			this.password = password;
 		}

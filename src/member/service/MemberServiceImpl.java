@@ -1,5 +1,7 @@
 package member.service;
 
+import java.util.List;
+
 import member.dto.MemberDto.FindUserEmailBynameAndTelInputDto;
 import member.dto.MemberDto.FindUserEmailBynameAndTelOutputDto;
 import member.dto.MemberDto.FindUserPasswordByEmailAndNameInputDto;
@@ -35,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 		return null;};
 	
 	
-	public ViewOverdueMembersOutputDto viewOverdueMembers(ViewOverdueMembersInputDto viewovermember) {
+	public List<ViewOverdueMembersOutputDto> viewOverdueMembers(ViewOverdueMembersInputDto viewovermember) {
 		return null;};
 	
 	

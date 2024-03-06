@@ -18,9 +18,12 @@ public interface MemberDAO {
 
 	// 모든 회원 정보 조회 (관리자용)
 	List<ViewAllMembersInfoOutputDto> viewAllMembersInfo();
-
+	
+	//관리자 여부 확인
+	boolean isAdmin(long userSeq);
+	
 	// 연체자 조회
-	List<ViewOverdueMembersOutputDto> viewOverdueMembers();
+	public List<ViewOverdueMembersOutputDto> viewOverdueMembers(ViewOverdueMembersInputDto viewovermember);
 
 	// 도서 연체 제한 설정
 	void restrictBook(RestrictBookLoanInputDto restriction);
