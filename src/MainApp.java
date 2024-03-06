@@ -1,4 +1,3 @@
-import book.dto.BookDto.DeleteBookInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.service.BookService;
 import config.AppConfig;
@@ -31,7 +30,18 @@ public class MainApp {
 		//bs.UpdateBookBySeq(new UpdateBookBySeqInputDto("테스트용", "", "출판사", "저자", Date.valueOf("2024-03-06"),42));
 		//System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("테스트용")).toArray()[0].toString());
 	
-		bs.DeleteBook(new DeleteBookInputDto(42));
-		System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("테스트용")).toArray()[0].toString());
+		//bs.DeleteBook(new DeleteBookInputDto(42));
+		//System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("테스트용")).toArray()[0].toString());
+		
+		//bs.RateBook(new RateBookInputDto(5,43,21));
+		
+		//bs.CheckBookAvailabilityBySeq(new CheckBookAvailabilityBySeqInputDto());
+		
+		//System.out.println(bs.ViewLoanHistory(new ViewLoanHistoryInputDto(21)).toArray()[0].toString());
+		
+		/*
+		for(int i=1; i<=5; i++) {
+			System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("스마트",1)).toArray()[i].toString());
+		}*/
 	}
 }

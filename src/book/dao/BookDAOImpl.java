@@ -14,6 +14,11 @@ import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
 import book.dto.BookDto.DeleteBookInputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.ManageBookRequestInputDto;
+import book.dto.BookDto.ManageBookRequestOutputDto;
+import book.dto.BookDto.RateBookInputDto;
+import book.dto.BookDto.RecommendBookInputDto;
+import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.RegisterBookRequestedInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
@@ -23,6 +28,8 @@ import book.dto.BookDto.SearchBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.dto.BookDto.UpdateBookBySeqInputDto;
 import book.dto.BookDto.ViewFavoriteBookInputDto;
+import book.dto.BookDto.ViewLoanHistoryInputDto;
+import book.dto.BookDto.ViewLoanHistoryOutputDto;
 import config.AppConfig;
 import config.AppConfig.DBUtil;
 
@@ -62,19 +69,22 @@ public class BookDAOImpl implements BookDAO{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Book> booklist = new ArrayList<>();
-		String sql = "select book_seq, book_title, call_number, publisher, "
-				+ "author, loan_possible from 책 where book_title like ?";
+		String sql = "SELECT * FROM\r\n"
+				+ "    (SELECT 책.*, DENSE_RANK() OVER(ORDER BY 책.book_title) AS rnum FROM 책 where book_title like ?)\r\n"
+				+ "WHERE rnum >=? and rnum<=?";
 		
 		try { 
 			con = AppConfig.DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			//System.out.println(searchbook.getTitle());
 			ps.setString(1,"%"+searchbook.getTitle()+"%");
+			ps.setInt(2,(searchbook.getPage()-1)*10+1);
+			ps.setInt(3, searchbook.getPage()*10);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				Book book = new Book(rs.getLong(1),rs.getString(2),rs.getString(3),
-						rs.getString(4),rs.getString(5),rs.getInt(6));
+						rs.getString(4),rs.getString(5),rs.getInt(7));
 				booklist.add(book);
 				//System.out.println(book.getTitle());
 			}
@@ -212,16 +222,58 @@ public class BookDAOImpl implements BookDAO{
 		
 	}
 
+	/*
 	@Override
 	public CheckBookAvailabilityBySeqOutputDto checkBook(CheckBookAvailabilityBySeqInputDto checkbook) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "";
+		String sql = "select loan_possible from 책 where book_seq=?";
+		CheckBookAvailabilityBySeqOutputDto op;
 		
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setLong(1, checkbook.getBookseq());
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt(1)==1) {
+					PreparedStatement ps2 = null;
+					String sql2 = "insert into 대여 (rental_date,user_seq) values(select sysdate from dual,?)";
+					ResultSet rs2 = null;
+					try {
+						ps2 = con.prepareStatement(sql2);
+						ps.setLong(1, checkbook.getUserseq());
+						rs2=ps.executeQuery();
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						DBUtil.DbClose(con, ps2);
+					}
+					
+					PreparedStatement ps3 = null;
+					ResultSet rs3 = null;
+					String sql3 = "insert into 대여상세 (expectedreturn_date,book_seq,borrow_seq) values((select dateadd(day,14,(select sysdate from dual))),?,?)";
+					try {
+						ps3 = con.prepareStatement(sql3);
+						ps3.setLong(2, checkbook.getBookseq());
+						ps3.setLong(3, rs2.getLong(1));
+						rs3 = ps3.executeQuery();
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						DBUtil.DbClose(con, ps3);
+					}
+				}
+				
+				op = new CheckBookAvailabilityBySeqOutputDto(rs.getDate(1),);
+			}
+			
+			
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -255,7 +307,7 @@ public class BookDAOImpl implements BookDAO{
 		}finally {
 			DBUtil.DbClose(con, ps);
 		}
-	}
+	}*/
 
 	@Override
 	public void registerReqBook(RegisterBookRequestedInputDto registerbook) {
@@ -327,22 +379,142 @@ public class BookDAOImpl implements BookDAO{
 		}
 	}
 
-	//@Override
-	/*
+	@Override
 	public void requestBook(RequestBookInputDto requestbook) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql="insert into 도서추가요청 (request_date, request_status, addbook_title, addbook_author, publisher, user_seq) values (select sysdate from dual,?,?,?,?,?)";
+		String sql="insert into 도서추가요청 (request_date, request_status, addbook_title, addbook_author, publisher, user_seq) values (select sysdate from dual,'처리 중',?,?,?,?)";
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setDate(1, );
+			ps.setString(1, requestbook.getTitle());
+			ps.setString(2, requestbook.getAuthor());
+			ps.setString(3, requestbook.getPublisher());
+			ps.setLong(4, requestbook.getUserseq());
+			ps.executeQuery();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBUtil.DbClose(con, ps);
 		}
 	}
-	*/
+
+	@Override
+	public ManageBookRequestOutputDto manageRequest(ManageBookRequestInputDto managebook) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ManageBookRequestOutputDto op = null;
+		String sql = "update 도서추가요청 set request_status='처리완료' where addbook_title=? and publisher=? and addbook_author=? and user_seq=?";
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, managebook.getTitle());
+			ps.setString(2, managebook.getPublisher());
+			ps.setString(3, managebook.getAuthor());
+			ps.setLong(4, managebook.getUserseq());
+			rs= ps.executeQuery();
+			
+			if(rs.next()) {
+				op = new ManageBookRequestOutputDto();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.DbClose(con, ps, rs);
+		}
+		return null;
+	}
+
+	@Override
+	public void rateBook(RateBookInputDto ratebook) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "insert into 별점 (rating_date, score, book_seq, user_seq) values((select sysdate from dual), ?,?,?)";
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, ratebook.getScore());
+			ps.setLong(2, ratebook.getBookseq());
+			ps.setLong(3, ratebook.getUserseq());
+			ps.executeQuery();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.DbClose(con, ps);
+		}
+		
+	}
+	
+	@Override
+	public List<ViewLoanHistoryOutputDto> viewLoan(ViewLoanHistoryInputDto loanbook) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ViewLoanHistoryOutputDto> loanlist = new ArrayList<>();
+		String sql = "select book_title,call_number,publisher,author,publication_year,rental_date,expectedreturn_date from 대여 join 대여상세 using(borrow_seq) join 책 using(book_seq) where user_seq=?";
+		try {
+			con = DBUtil.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setLong(1, loanbook.getUserseq());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ViewLoanHistoryOutputDto op = new ViewLoanHistoryOutputDto(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getDate(6),rs.getDate(7));
+				loanlist.add(op);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.DbClose(con, ps, rs);
+		}
+		
+		return loanlist;
+	}
+	
+	@Override
+	public List<RecommendBookOutputDto> recommendBook(RecommendBookInputDto recommendbook) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<RecommendBookOutputDto> recommendlist = new ArrayList<>();
+		String sql = "select book_title,call_number,publisher,author,loan_possible,publication_year, dense_rank() over (order by score desc, book_title desc) as 순위\r\n"
+				+ "from 별점 join 책 using(book_seq)\r\n"
+				+ "join 회원 on 회원.category = 책.name\r\n"
+				+ "where user_seq = ? and 순위>=1 and 순위<=5";
+		
+		try {
+			con = DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, recommendbook.getUserseq());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				RecommendBookOutputDto op = new RecommendBookOutputDto(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getInt(6));
+				recommendlist.add(op);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.DbClose(con, ps, rs);
+		}
+		return recommendlist;
+	}
+
+	@Override
+	public CheckBookAvailabilityBySeqOutputDto checkBook(CheckBookAvailabilityBySeqInputDto checkbook) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void registerUnreqBook(RegisterBookUnrequestedInputDto registerbook) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 }
