@@ -4,10 +4,10 @@ import java.util.Scanner;
 import book.controller.BookController;
 import book.dto.BookDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
-import book.dto.BookDto.SearchBookBySeqInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
-import book.service.BookService;
 import member.controller.MemberController;
+import session.Session;
+
 
 public class MenuView {
 	static BookController bookController;
@@ -15,7 +15,7 @@ public class MenuView {
 
 	public static void menu() {
 		while (true) {
-
+			
 			MenuView.printMenu();
 
 			int menu = Integer.parseInt(sc.nextLine());
@@ -73,7 +73,7 @@ public class MenuView {
 				System.out.println();
 				long bookseq = sc.nextInt();
 				
-				BookDto.SearchBookBySeqInputDto ip = new BookDto.SearchBookBySeqInputDto();
+				BookDto.SearchBookBySeqInputDto ip = new BookDto.SearchBookBySeqInputDto(bookseq);
 				ip.setBookseq(bookseq);
 				BookController.SearchBookBySeq(ip);
 				break;
@@ -127,18 +127,37 @@ public class MenuView {
 	 * 로그인 메뉴
 	 * */
 	public static void login() {
+		Session ss = new Session();
+		
 		 System.out.print("아이디 : ");
 		 String id = sc.nextLine();
 		 
-		 System.out.print("비번 : ");
-		 String password = sc.nextLine();
+		 System.out.print("비밀번호 : ");
+		 int password = sc.nextInt();
 		 
-		MemberController.login(id, password); 
+		 MemberController.login(id, password);
+		 
+		 if(id.equals("admin")) {
+			 if(password == 1234) {
+				 
+			 }
+		 }
+		 
+	}
+	/**
+	 * 회원/관리자 여부
+	 * */
+	public static void checkManager() {
+		Session ss = new Session();
+		
+		
+		/*if (ss.isAdmin() == true) {
+			MenuView.printAdminMenu();
+		}
+		else MenuView.printUserMenu();*/
 	}
 	
-	/**
-	 * 
-	 */
+	
 	
 	/**
 	 * 회원 메뉴
@@ -240,7 +259,7 @@ public class MenuView {
 			switch (menu) {
 			case 1:
 				
-				//BookController.AddFavoriteBook(ip);// 관심도서 추가
+				MenuView.insertFavorBook();// 관심도서 추가
 				break;
 
 			case 2:
@@ -257,6 +276,22 @@ public class MenuView {
 			}
 		}
 	}
+	
+
+	/**
+	 *  관심도서 추가
+	 */
+	public static void insertFavorBook(){
+		System.out.print("아이디 : ");
+		 String id = sc.nextLine();
+		 
+		 System.out.print("책 번호를 입력해주세요.");
+		 String password = sc.nextLine();
+        
+		
+
+	}
+	
 	
 	/**
 	 * 회원정보 조회(회원) 관리 메뉴

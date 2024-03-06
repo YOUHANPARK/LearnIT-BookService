@@ -40,4 +40,14 @@ public class EndView {
 		
 		System.out.println();
 	}
+	
+	
+	
+	/**
+     * 성공에 관련된 메세지 출력 
+     * @param message
+     */
+    public static void printMessage(String message) {
+         System.out.println(message+"\n");
+    }
 }
