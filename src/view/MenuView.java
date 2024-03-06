@@ -137,11 +137,7 @@ public class MenuView {
 		 
 		 MemberController.login(id, password);
 		 
-		 if(id.equals("admin")) {
-			 if(password == 1234) {
-				 
-			 }
-		 }
+		 
 		 
 	}
 	/**

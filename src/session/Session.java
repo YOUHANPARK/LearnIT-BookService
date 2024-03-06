@@ -2,6 +2,8 @@ package session;
 
 
 public class Session {
+	LoginMemberOutputDto loginMember = new 
+	
 	private long user_seq;
 	private long bookseq;
 	private boolean isAdmin;
