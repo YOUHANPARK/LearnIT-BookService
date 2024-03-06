@@ -20,24 +20,26 @@ public class Book {
 		super();
 	}
 	
-	public Book(String title, String callnum, String publisher,String author, int loanposb) {
+	public Book(long bookseq, String title, String callnum, String publisher,
+			String author, int loanposb) {
+		this.bookseq = bookseq;
 		this.title = title;
 		this.callnum = callnum;
 		this.publisher = publisher;
 		this.author = author;
 		this.loanposb = loanposb;
 	}
-	
-	public Book(long bookseq, String title, String callnum, String publisher,
-			String author, int loanposb) {
-		this(title, callnum, publisher,author, loanposb);
-		this.bookseq = bookseq;
-	}
 
 	public Book(long bookseq, String title, String callnum, String publisher,
 			String author, String intro, int loanposb, Date pubyear, String category){
-		this(bookseq, title, callnum, publisher, author, loanposb);
+		
+		this.bookseq = bookseq;
+		this.title = title;
+		this.callnum = callnum;
+		this.publisher = publisher;
+		this.author = author;
 		this.intro = intro;
+		this.loanposb = loanposb;
 		this.pubyear = pubyear;
 		this.category = category;
 	}

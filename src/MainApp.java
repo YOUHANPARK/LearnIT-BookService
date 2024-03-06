@@ -1,4 +1,3 @@
-import book.dto.BookDto.DeleteBookInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.service.BookService;
 import config.AppConfig;
@@ -17,21 +16,6 @@ public class MainApp {
 		BookService bs =  ac.getBookService();
 		System.out.println("tlfgod");
 		//System.out.println(bs.findAllBook(null).toArray()[0].toString());
-		//bs.SearchBookByTitle(new SearchBookByTitleInputDto());
-		//System.out.println(bs.SearchBookBySeq(new SearchBookBySeqInputDto(105280932)).toString());
-		//bs.AddFavoriteBook(new AddFavoriteBookInputDto(21,105280932));
-		//System.out.println(bs.ViewFavoriteBook(new ViewFavoriteBookInputDto(21)).toArray()[0].toString());
-		
-		//bs.DeleteFavoriteBook(new DeleteFavoriteBookInputDto("마인크래프트 크리에이티브 핸드북",21));
-		//System.out.println(bs.ViewFavoriteBook(new ViewFavoriteBookInputDto(21)).toArray()[0].toString());
-		
-		//bs.RegisterBookUnrequested(new RegisterBookUnrequestedInputDto("테스트용","","테스트","테스트","테스트",Date.valueOf("2024-03-06"),1,21,"게임"));
-		//System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("테스트용")).toArray()[0].toString());
-		
-		//bs.UpdateBookBySeq(new UpdateBookBySeqInputDto("테스트용", "", "출판사", "저자", Date.valueOf("2024-03-06"),42));
-		//System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("테스트용")).toArray()[0].toString());
-	
-		bs.DeleteBook(new DeleteBookInputDto(42));
-		System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("테스트용")).toArray()[0].toString());
+		bs.SearchBookByTitle(new SearchBookByTitleInputDto());
 	}
 }

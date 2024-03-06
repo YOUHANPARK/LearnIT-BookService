@@ -52,79 +52,77 @@ public class BookServiceImpl implements BookService{
 	
 	@Override
 	public List<SearchBookByTitleOutputDto> SearchBookByTitle(SearchBookByTitleInputDto ip) {
-		//ip.setTitle("마인크래프트");
+		ip.setTitle("마인크래프트");
 		List<SearchBookByTitleOutputDto> result = new ArrayList<>();
-		bookDAO.findTitleBook(ip).forEach(b -> result.add(new SearchBookByTitleOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), b.getLoanposb())));
+		bookDAO.findTitleBook(ip).forEach(b -> result.add(new SearchBookByTitleOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), true)));
 		return result;
 	}
 
 	@Override
 	public List<SearchBookByCategoryOutputDto> SearchBookByCategory(SearchBookByCategoryInputDto ip) {
 		List<SearchBookByCategoryOutputDto> result = new ArrayList<>();
-		bookDAO.findCategoryBook(ip).forEach(b->result.add(new SearchBookByCategoryOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), b.getLoanposb())));
+		//bookDAO.findCategoryBook(ip).forEach(b->result.add(new SearchBookByCategoryOutputDto(b.getBookseq(), b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), true)));
 		return result;
 	}
 
 	@Override
 	public SearchBookBySeqOutputDto SearchBookBySeq(SearchBookBySeqInputDto ip) {
 		SearchBookBySeqOutputDto result = new SearchBookBySeqOutputDto();
-		result = bookDAO.findSeqBook(ip);
+		//result = bookDAO.findSeqBook(ip);
 		return result;
 	}
 
 	@Override
 	public void AddFavoriteBook(AddFavoriteBookInputDto ip) {
-		bookDAO.addFBook(ip);
+		
 		
 	}
 
 	@Override
 	public List<ViewFavoriteBookOutputDto> ViewFavoriteBook(ViewFavoriteBookInputDto ip) {
-		List<ViewFavoriteBookOutputDto> result = new ArrayList<>();
-		bookDAO.findAllFBook(ip).forEach(b->result.add(new ViewFavoriteBookOutputDto(b.getTitle(), b.getCallnum(), b.getPublisher(), b.getAuthor(), b.getLoanposb())));
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void DeleteFavoriteBook(DeleteFavoriteBookInputDto ip) {
-		bookDAO.delFBook(ip);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public CheckBookAvailabilityBySeqOutputDto CheckBookAvailabilityBySeq(CheckBookAvailabilityBySeqInputDto ip) {
-		CheckBookAvailabilityBySeqOutputDto result = new CheckBookAvailabilityBySeqOutputDto();
-		result = bookDAO.checkBook(ip);
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void RegisterBookUnrequested(RegisterBookUnrequestedInputDto ip) {
-		bookDAO.registerUnreqBook(ip);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void RegisterBookRequested(RegisterBookRequestedInputDto ip) {
-		bookDAO.registerReqBook(ip);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void UpdateBookBySeq(UpdateBookBySeqInputDto ip) {
-		bookDAO.updateBook(ip);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void DeleteBook(DeleteBookInputDto ip) {
-		bookDAO.deleteBook(ip);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void RequestBook(RequestBookInputDto ip) {
-		bookDAO.requestBook(ip);
+		// TODO Auto-generated method stub
 		
 	}
 
