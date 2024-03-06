@@ -1,5 +1,7 @@
 package member.service;
 
+import java.util.List;
+
 import member.dto.MemberDto.*;
 
 public interface MemberService {
@@ -36,10 +38,10 @@ public interface MemberService {
 	/**
 	 * 연체자 조회
 	 * 관리자가 연체자 목록을 조회하는 api
-	 * @param viewovermember
+	 * @param List<ViewOverdueMembersOutputDto>
 	 * @return
 	 */
-	ViewOverdueMembersOutputDto viewOverdueMembers(ViewOverdueMembersInputDto viewovermember);
+	List<ViewOverdueMembersOutputDto> viewOverdueMembers(ViewOverdueMembersInputDto viewovermember);
 	
 	/**
 	 * 도서 연체 제한 

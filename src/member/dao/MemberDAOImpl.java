@@ -19,6 +19,7 @@ import member.dto.MemberDto.UpdateMemberInfoForMemInputDto;
 import member.dto.MemberDto.ViewAllMembersInfoInputDto;
 import member.dto.MemberDto.ViewAllMembersInfoOutputDto;
 import member.dto.MemberDto.ViewMemberInfoOutputDto;
+import member.dto.MemberDto.ViewOverdueMembersInputDto;
 import member.dto.MemberDto.ViewOverdueMembersOutputDto;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -64,22 +65,22 @@ public class MemberDAOImpl implements MemberDAO {
 //			System.out.println("회원 정보를 찾을 수 없습니다.");
 //		}
 		
-		List<ViewAllMembersInfoOutputDto> allMembers = memberDAO.viewAllMembersInfo();
-	    
-	    if (!allMembers.isEmpty()) {
-	        System.out.println("모든 회원 정보 조회 결과:");
-	        for (ViewAllMembersInfoOutputDto memberInfo : allMembers) {
-	            System.out.println("회원 고유 번호: " + memberInfo.getUserSeq());
-	            System.out.println("이름: " + memberInfo.getName());
-	            System.out.println("전화번호: " + memberInfo.getTel());
-	            System.out.println("주소: " + memberInfo.getAddr());
-	            System.out.println("이메일: " + memberInfo.getEmail());
-	            System.out.println("카테고리: " + memberInfo.getCategory());
-	            System.out.println("-----------------------------------");
-	        }
-	    } else {
-	        System.out.println("등록된 회원 정보가 없습니다.");
-	    }
+//		List<ViewAllMembersInfoOutputDto> allMembers = memberDAO.viewAllMembersInfo();
+//	    
+//	    if (!allMembers.isEmpty()) {
+//	        System.out.println("모든 회원 정보 조회 결과:");
+//	        for (ViewAllMembersInfoOutputDto memberInfo : allMembers) {
+//	            System.out.println("회원 고유 번호: " + memberInfo.getUserSeq());
+//	            System.out.println("이름: " + memberInfo.getName());
+//	            System.out.println("전화번호: " + memberInfo.getTel());
+//	            System.out.println("주소: " + memberInfo.getAddr());
+//	            System.out.println("이메일: " + memberInfo.getEmail());
+//	            System.out.println("카테고리: " + memberInfo.getCategory());
+//	            System.out.println("-----------------------------------");
+//	        }
+//	    } else {
+//	        System.out.println("등록된 회원 정보가 없습니다.");
+//	    }
 
 	}
 
@@ -173,13 +174,25 @@ public class MemberDAOImpl implements MemberDAO {
 		    }
 		return membersList;
 	};
-
+	//관리자 여부 확인
+	@Override
+	public boolean isAdmin(long userSeq) {
+		return false;
+	};
+	
 	// 연체자 조회
 	@Override
-	public List<ViewOverdueMembersOutputDto> viewOverdueMembers() {
+	public List<ViewOverdueMembersOutputDto> viewOverdueMembers(ViewOverdueMembersInputDto viewOvermember) {
 		List<ViewOverdueMembersOutputDto> overdueMembersList = new ArrayList<>();
+		
+		
 	    // 예시 SQL 쿼리: 연체 상태인 회원 정보 조회
-	    String sql = "";
+	    String sql = "SELECT ds.expectedreturn_date , d.user_seq , u.name , b.book_title\r\n"
+	    		+ "FROM 대여상세 ds , 대여 d , 회원 u , 책 b\r\n"
+	    		+ "WHERE (((ds.expectedreturn_date <= TO_DATE('2024.03.06','YYYY.MM.DD')\r\n"
+	    		+ "AND d.borrow_seq = ds.borrow_seq) AND d.user_seq = u.user_seq)\r\n"
+	    		+ "AND b.book_seq = ds.book_seq)\r\n"
+	    		+ "AND b.loan_possible = 0";
 	    
 	    try (Connection conn = DBUtil.getConnection(); 
 	         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -224,5 +237,5 @@ public class MemberDAOImpl implements MemberDAO {
 			FindUserPasswordByEmailAndNameInputDto userInfo) {
 		return null;
 	};
-
+	
 }
