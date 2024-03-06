@@ -8,6 +8,11 @@ import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
 import book.dto.BookDto.DeleteBookInputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.ManageBookRequestInputDto;
+import book.dto.BookDto.ManageBookRequestOutputDto;
+import book.dto.BookDto.RateBookInputDto;
+import book.dto.BookDto.RecommendBookInputDto;
+import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.RegisterBookRequestedInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
@@ -17,6 +22,8 @@ import book.dto.BookDto.SearchBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.dto.BookDto.UpdateBookBySeqInputDto;
 import book.dto.BookDto.ViewFavoriteBookInputDto;
+import book.dto.BookDto.ViewLoanHistoryInputDto;
+import book.dto.BookDto.ViewLoanHistoryOutputDto;
 
 public interface BookDAO {
 	
@@ -68,6 +75,7 @@ public interface BookDAO {
 	void delFBook(DeleteFavoriteBookInputDto delbook);
 	
 	CheckBookAvailabilityBySeqOutputDto checkBook(CheckBookAvailabilityBySeqInputDto checkbook);
+	
 	void registerUnreqBook(RegisterBookUnrequestedInputDto registerbook);
 	void registerReqBook(RegisterBookRequestedInputDto registerbook);
 	
@@ -75,4 +83,14 @@ public interface BookDAO {
 	void deleteBook(DeleteBookInputDto deletebook);
 	
 	void requestBook(RequestBookInputDto requestbook);
+	
+	ManageBookRequestOutputDto manageRequest(ManageBookRequestInputDto managebook);
+	
+	
+	
+	void rateBook(RateBookInputDto ratebook);
+	
+	List<ViewLoanHistoryOutputDto> viewLoan(ViewLoanHistoryInputDto loanbook);
+	
+	List<RecommendBookOutputDto> recommendBook(RecommendBookInputDto recommendbook);
 }

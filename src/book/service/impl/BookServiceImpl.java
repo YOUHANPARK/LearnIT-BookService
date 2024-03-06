@@ -154,20 +154,19 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public void RateBook(RateBookInputDto ip) {
-		// TODO Auto-generated method stub
+		bookDAO.rateBook(ip);
 		
 	}
 
 	@Override
 	public List<ViewLoanHistoryOutputDto> ViewLoanHistory(ViewLoanHistoryInputDto ip) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ViewLoanHistoryOutputDto> loanlist = bookDAO.viewLoan(ip);
+		return loanlist;
 	}
 
 	@Override
 	public List<RecommendBookOutputDto> RecommendBook(RecommendBookInputDto ip) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookDAO.recommendBook(ip);
 	}
 
 }

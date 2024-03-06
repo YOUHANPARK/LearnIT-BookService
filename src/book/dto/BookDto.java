@@ -9,6 +9,7 @@ public class BookDto {
 	 */
 	public static class SearchBookByTitleInputDto{
 		String title;
+		int page;
 
 		public String getTitle() {
 			return title;
@@ -17,14 +18,24 @@ public class BookDto {
 		public void setTitle(String title) {
 			this.title = title;
 		}
+		
+
+		public int getPage() {
+			return page;
+		}
+
+		public void setPage(int page) {
+			this.page = page;
+		}
 
 		public SearchBookByTitleInputDto() {
 			super();
 		}
 
-		public SearchBookByTitleInputDto(String title) {
+		public SearchBookByTitleInputDto(String title, int page) {
 			super();
 			this.title = title;
+			this.page = page;
 		}
 		
 		
@@ -117,6 +128,7 @@ public class BookDto {
 	 */
 	public static class SearchBookByCategoryInputDto {
 		String category;
+		int page;
 
 		public String getCategory() {
 			return category;
@@ -472,10 +484,54 @@ public class BookDto {
 	public static class CheckBookAvailabilityBySeqInputDto{
 		long bookseq;
 		long userseq;
+		public long getBookseq() {
+			return bookseq;
+		}
+		public void setBookseq(long bookseq) {
+			this.bookseq = bookseq;
+		}
+		public long getUserseq() {
+			return userseq;
+		}
+		public void setUserseq(long userseq) {
+			this.userseq = userseq;
+		}
+		public CheckBookAvailabilityBySeqInputDto() {
+			super();
+		}
+		public CheckBookAvailabilityBySeqInputDto(long bookseq, long userseq) {
+			super();
+			this.bookseq = bookseq;
+			this.userseq = userseq;
+		}
+		
+		
 	}
 	public static class CheckBookAvailabilityBySeqOutputDto{
 		Date returndate;
 		int bookposbnum;
+		public Date getReturndate() {
+			return returndate;
+		}
+		public void setReturndate(Date returndate) {
+			this.returndate = returndate;
+		}
+		public int getBookposbnum() {
+			return bookposbnum;
+		}
+		public void setBookposbnum(int bookposbnum) {
+			this.bookposbnum = bookposbnum;
+		}
+		public CheckBookAvailabilityBySeqOutputDto() {
+			super();
+		}
+		public CheckBookAvailabilityBySeqOutputDto(Date returndate, int bookposbnum) {
+			super();
+			this.returndate = returndate;
+			this.bookposbnum = bookposbnum;
+		}
+		
+		
 	}
 	
 	/**
@@ -791,19 +847,98 @@ public class BookDto {
 		String addauthor;
 	}
 	
+	/**
+	 * 도서 요청 처리(관리자)
+	 */
 	public static class ManageBookRequestInputDto{
 		String title;
 		String publisher;
 		String author;
-		int pubyear;
+		Date pubyear;
 		long userseq;
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getPublisher() {
+			return publisher;
+		}
+		public void setPublisher(String publisher) {
+			this.publisher = publisher;
+		}
+		public String getAuthor() {
+			return author;
+		}
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+		public Date getPubyear() {
+			return pubyear;
+		}
+		public void setPubyear(Date pubyear) {
+			this.pubyear = pubyear;
+		}
+		public long getUserseq() {
+			return userseq;
+		}
+		public void setUserseq(long userseq) {
+			this.userseq = userseq;
+		}
+		
+		
 	}
 	public static class ManageBookRequestOutputDto{
 		Date requestdate;
-		int requeststatus;
+		String requeststatus;
 		String addtitle;
 		String addauthor;
 		long requestuserseq;
+		public Date getRequestdate() {
+			return requestdate;
+		}
+		public void setRequestdate(Date requestdate) {
+			this.requestdate = requestdate;
+		}
+		public String getRequeststatus() {
+			return requeststatus;
+		}
+		public void setRequeststatus(String requeststatus) {
+			this.requeststatus = requeststatus;
+		}
+		public String getAddtitle() {
+			return addtitle;
+		}
+		public void setAddtitle(String addtitle) {
+			this.addtitle = addtitle;
+		}
+		public String getAddauthor() {
+			return addauthor;
+		}
+		public void setAddauthor(String addauthor) {
+			this.addauthor = addauthor;
+		}
+		public long getRequestuserseq() {
+			return requestuserseq;
+		}
+		public void setRequestuserseq(long requestuserseq) {
+			this.requestuserseq = requestuserseq;
+		}
+		public ManageBookRequestOutputDto() {
+			super();
+		}
+		public ManageBookRequestOutputDto(Date requestdate, String requeststatus, String addtitle, String addauthor,
+				long requestuserseq) {
+			super();
+			this.requestdate = requestdate;
+			this.requeststatus = requeststatus;
+			this.addtitle = addtitle;
+			this.addauthor = addauthor;
+			this.requestuserseq = requestuserseq;
+		}
+		
+		
 	}
 	
 	public static class ReturnBookBySeqInputDto{
@@ -823,36 +958,202 @@ public class BookDto {
 		Date returndate;
 	}
 	
+	/**
+	 * 별점 등록
+	 */
 	public static class RateBookInputDto{
 		int score;
 		long bookseq;
 		long userseq;
+		
+		public int getScore() {
+			return score;
+		}
+		public void setScore(int score) {
+			this.score = score;
+		}
+		public long getBookseq() {
+			return bookseq;
+		}
+		public void setBookseq(long bookseq) {
+			this.bookseq = bookseq;
+		}
+		public long getUserseq() {
+			return userseq;
+		}
+		public void setUserseq(long userseq) {
+			this.userseq = userseq;
+		}
+		public RateBookInputDto() {
+			super();
+		}
+		public RateBookInputDto(int score, long bookseq, long userseq) {
+			super();
+			this.score = score;
+			this.bookseq = bookseq;
+			this.userseq = userseq;
+		}
+		
+		
 	}
 	
 	public static class ViewLoanHistoryInputDto{
 		long userseq;
+		
+		public long getUserseq() {
+			return userseq;
+		}
+
+		public void setUserseq(long userseq) {
+			this.userseq = userseq;
+		}
+
+		public ViewLoanHistoryInputDto(long userseq) {
+			super();
+			this.userseq = userseq;
+		}
+		
+		
 	}
 	public static class ViewLoanHistoryOutputDto{
 		String title;
-		int booknum;
+		String booknum;
 		String publisher;
 		String author;
-		int pubyear;
+		Date pubyear;
 		Date loandate;
 		Date returndate;
+		
+		public ViewLoanHistoryOutputDto() {
+			super();
+		}
+
+		public ViewLoanHistoryOutputDto(String title, String booknum, String publisher, String author, Date pubyear,
+				Date loandate, Date returndate) {
+			super();
+			this.title = title;
+			this.booknum = booknum;
+			this.publisher = publisher;
+			this.author = author;
+			this.pubyear = pubyear;
+			this.loandate = loandate;
+			this.returndate = returndate;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("ViewLoanHistoryOutputDto [title=");
+			builder.append(title);
+			builder.append(", booknum=");
+			builder.append(booknum);
+			builder.append(", publisher=");
+			builder.append(publisher);
+			builder.append(", author=");
+			builder.append(author);
+			builder.append(", pubyear=");
+			builder.append(pubyear);
+			builder.append(", loandate=");
+			builder.append(loandate);
+			builder.append(", returndate=");
+			builder.append(returndate);
+			builder.append("]");
+			return builder.toString();
+		}
+		
+		
 	}
 	
 	public static class RecommendBookInputDto{
 		long userseq;
 		long ratingseq;
+		
+		public long getUserseq() {
+			return userseq;
+		}
+		public void setUserseq(long userseq) {
+			this.userseq = userseq;
+		}
+		public long getRatingseq() {
+			return ratingseq;
+		}
+		public void setRatingseq(long ratingseq) {
+			this.ratingseq = ratingseq;
+		}
+		
+		
 	}
 	public static class RecommendBookOutputDto{
 		String title;
-		int booknum;
+		String booknum;
 		String publisher;
 		String author;
-		int pubyear;
-		boolean bookposb;
+		Date pubyear;
+		int bookposb;
+		
+		public RecommendBookOutputDto() {
+			super();
+		}
+
+		public RecommendBookOutputDto(String title, String booknum, String publisher, String author, Date pubyear,
+				int bookposb) {
+			super();
+			this.title = title;
+			this.booknum = booknum;
+			this.publisher = publisher;
+			this.author = author;
+			this.pubyear = pubyear;
+			this.bookposb = bookposb;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getBooknum() {
+			return booknum;
+		}
+
+		public void setBooknum(String booknum) {
+			this.booknum = booknum;
+		}
+
+		public String getPublisher() {
+			return publisher;
+		}
+
+		public void setPublisher(String publisher) {
+			this.publisher = publisher;
+		}
+
+		public String getAuthor() {
+			return author;
+		}
+
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+
+		public Date getPubyear() {
+			return pubyear;
+		}
+
+		public void setPubyear(Date pubyear) {
+			this.pubyear = pubyear;
+		}
+
+		public int getBookposb() {
+			return bookposb;
+		}
+
+		public void setBookposb(int bookposb) {
+			this.bookposb = bookposb;
+		}
+		
 	}
 }
 
