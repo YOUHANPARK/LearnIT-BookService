@@ -3,7 +3,20 @@ package book.dao;
 import java.util.List;
 
 import book.dto.Book;
+import book.dto.BookDto.AddFavoriteBookInputDto;
+import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
+import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
+import book.dto.BookDto.DeleteBookInputDto;
+import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RegisterBookRequestedInputDto;
+import book.dto.BookDto.RegisterBookUnrequestedInputDto;
+import book.dto.BookDto.RequestBookInputDto;
+import book.dto.BookDto.SearchBookByCategoryInputDto;
+import book.dto.BookDto.SearchBookBySeqInputDto;
+import book.dto.BookDto.SearchBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
+import book.dto.BookDto.UpdateBookBySeqInputDto;
+import book.dto.BookDto.ViewFavoriteBookInputDto;
 
 public interface BookDAO {
 	
@@ -47,5 +60,19 @@ public interface BookDAO {
 	
 	List<Book> findAllBook();
 	List<Book> findTitleBook(SearchBookByTitleInputDto searchbook);
+	List<Book> findCategoryBook(SearchBookByCategoryInputDto searchbook);
 	
+	SearchBookBySeqOutputDto findSeqBook(SearchBookBySeqInputDto searchbook);
+	void addFBook(AddFavoriteBookInputDto addbook);
+	List<Book> findAllFBook(ViewFavoriteBookInputDto searchfbook);
+	void delFBook(DeleteFavoriteBookInputDto delbook);
+	
+	CheckBookAvailabilityBySeqOutputDto checkBook(CheckBookAvailabilityBySeqInputDto checkbook);
+	void registerUnreqBook(RegisterBookUnrequestedInputDto registerbook);
+	void registerReqBook(RegisterBookRequestedInputDto registerbook);
+	
+	void updateBook(UpdateBookBySeqInputDto updatebook);
+	void deleteBook(DeleteBookInputDto deletebook);
+	
+	void requestBook(RequestBookInputDto requestbook);
 }
