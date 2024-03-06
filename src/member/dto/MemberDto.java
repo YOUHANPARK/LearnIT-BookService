@@ -7,231 +7,518 @@ public class MemberDto {
 	/**
 	 * 회원가입을 위한 데이터
 	 */
-    public static class RegisterMemberInputDto {
-    	private long user_seq;
-        
-		
-		private String name;
-        private String tel;
-        private String addr;
-        private String email;
-        private String password;
-        private String category;
+	public static class RegisterMemberInputDto {
+		private long user_seq;
 
-        // Getters
-        public long getUser_seq() {
+		private String name;
+		private String tel;
+		private String addr;
+		private String email;
+		private String password;
+		private String category;
+
+		// Getters
+		public long getUser_seq() {
 			return user_seq;
 		}
-        public String getName() { return name; }
-        public String getTel() { return tel; }
-        public String getAddr() { return addr; }
-        public String getEmail() { return email; }
-        public String getPassword() { return password; }
-        public String getCategory() { return category; }
 
-        // Setters
-        public void setUser_seq(long user_seq) {
+		public String getName() {
+			return name;
+		}
+
+		public String getTel() {
+			return tel;
+		}
+
+		public String getAddr() {
+			return addr;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public String getPassword() {
+			return password;
+		}
+
+		public String getCategory() {
+			return category;
+		}
+
+		// Setters
+		public void setUser_seq(long user_seq) {
 			this.user_seq = user_seq;
 		}
-        public void setName(String name) { this.name = name; }
-        public void setTel(String tel) { this.tel = tel; }
-        public void setAddr(String addr) { this.addr = addr; }
-        public void setEmail(String email) { this.email = email; }
-        public void setPassword(String password) { this.password = password; }
-        public void setCategory(String category) { this.category = category; }
-        
-    }
 
-    /**
-     * 회원 정보 수정을 위한 데이터(회원, 관리자)
-     */
-    public static class UpdateMemberInfoForMemInputDto {
-        private String name;
-        private String tel;
-        private String addr;
-        private String email;
-        private int password;
-        private String category;
-        private long user_seq;
+		public void setName(String name) {
+			this.name = name;
+		}
 
-        // Getters
-        public String getName() { return name; }
-        public String getTel() { return tel; }
-        public String getAddr() { return addr; }
-        public String getEmail() { return email; }
-        public int getPassword() { return password; }
-        public String getCategory() { return category; }
-        public long getUser_seq() { return user_seq; }
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
 
-        // Setters
-        public void setName(String name) { this.name = name; }
-        public void setTel(String tel) { this.tel = tel; }
-        public void setAddr(String addr) { this.addr = addr; }
-        public void setEmail(String email) { this.email = email; }
-        public void setPassword(int password) { this.password = password; }
-        public void setCategory(String category) { this.category = category; }
-        public void setUser_seq(long user_seq) { this.user_seq = user_seq; }
-    }
-    
-    /**
-     * 해당 user_seq을 가진 회원 정보 조회를 위한 데이터(for 회원, 관리자)
-     */
-    public static class ViewMemberInfoInputDto {
-    	private long userSeq;
-    	
-    	// Getter
-        public long getUserSeq() { return userSeq; }
+		public void setAddr(String addr) {
+			this.addr = addr;
+		}
 
-        // Setter
-        public void setUserSeq(long userSeq) { this.userSeq = userSeq; }
-    }
-    
-    public static class ViewMemberInfoOutputDto {
-    	private String name;
-        private String tel;
-        private String addr;
-        private String email;
-        private int password;
-        private String category;
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-        // Getters
-        public String getName() { return name; }
-        public String getTel() { return tel; }
-        public String getAddr() { return addr; }
-        public String getEmail() { return email; }
-        public int getPassword() { return password; }
-        public String getCategory() { return category; }
-    }
-    
-    /**
-     * 회원 정보를 전부 조회하기 위한 데이터(관리자)
-     */
-    public static class ViewAllMembersInfoInputDto {
-        private long userSeq;
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-        // Getter
-        public long getUserSeq() { return userSeq; }
+		public void setCategory(String category) {
+			this.category = category;
+		}
 
-        // Setter
-        public void setUserSeq(long userSeq) { this.userSeq = userSeq; }
-    }
+	}
 
-    public static class ViewAllMembersInfoOutputDto {
-        private String name;
-        private String tel;
-        private String addr;
-        private String email;
-        private int password;
-        private String category;
+	/**
+	 * 회원 정보 수정을 위한 데이터(회원, 관리자)
+	 */
+	public static class UpdateMemberInfoForMemInputDto {
+		private String name;
+		private String tel;
+		private String addr;
+		private String email;
+		private int password;
+		private String category;
+		private long user_seq;
 
-        // Getters
-        public String getName() { return name; }
-        public String getTel() { return tel; }
-        public String getAddr() { return addr; }
-        public String getEmail() { return email; }
-        public int getPassword() { return password; }
-        public String getCategory() { return category; }
-    }
+		// Getters
+		public String getName() {
+			return name;
+		}
 
-    public static class ViewOverdueMembersInputDto {
-        private long userSeq;
+		public String getTel() {
+			return tel;
+		}
 
-        // Getter
-        public long getUserSeq() { return userSeq; }
+		public String getAddr() {
+			return addr;
+		}
 
-        // Setter
-        public void setUserSeq(long userSeq) { this.userSeq = userSeq; }
-    }
+		public String getEmail() {
+			return email;
+		}
 
-    public static class ViewOverdueMembersOutputDto {
-        private String name;
-        private String tel;
-        private String addr;
-        private String email;
+		public int getPassword() {
+			return password;
+		}
 
-        // Getters
-        public String getName() { return name; }
-        public String getTel() { return tel; }
-        public String getAddr() { return addr; }
-        public String getEmail() { return email; }
-    }
+		public String getCategory() {
+			return category;
+		}
 
-    public static class RestrictBookLoanInputDto {
-        private long userSeq;
+		public long getUser_seq() {
+			return user_seq;
+		}
 
-        // Getter
-        public long getUserSeq() { return userSeq; }
+		// Setters
+		public void setName(String name) {
+			this.name = name;
+		}
 
-        // Setter
-        public void setUserSeq(long userSeq) { this.userSeq = userSeq; }
-    }
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
 
-    public static class RestrictBookLoanOutputDto {
-        private int restrictDate;
+		public void setAddr(String addr) {
+			this.addr = addr;
+		}
 
-        // Getter
-        public int getRestrictDate() { return restrictDate; }
-    }
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-    public static class LoginMemberInputDto {
-        private String id;
-        private int password;
+		public void setPassword(int password) {
+			this.password = password;
+		}
 
-        // Getters
-        public String getId() { return id; }
-        public int getPassword() { return password; }
+		public void setCategory(String category) {
+			this.category = category;
+		}
 
-        // Setters
-        public void setId(String id) { this.id = id; }
-        public void setPassword(int password) { this.password = password; }
-    }
+		public void setUser_seq(long user_seq) {
+			this.user_seq = user_seq;
+		}
+	}
 
-    public static class LoginMemberOutputDto {
-        private long userSeq;
-        private boolean isAdmin;
+	/**
+	 * 해당 user_seq을 가진 회원 정보 조회를 위한 데이터(for 회원, 관리자)
+	 */
+	public static class ViewMemberInfoInputDto {
+		private long userSeq;
 
-        // Getters
-        public long getUserSeq() { return userSeq; }
-        public boolean isAdmin() { return isAdmin; }
-    }
+		// Getter
+		public long getUserSeq() {
+			return userSeq;
+		}
 
-    public static class FindUserEmailBynameAndTelInputDto {
-        private String name;
-        private String tel;
+		// Setter
+		public void setUserSeq(long userSeq) {
+			this.userSeq = userSeq;
+		}
+	}
 
-        // Getters
-        public String getName() { return name; }
-        public String getTel() { return tel; }
+	public static class ViewMemberInfoOutputDto {
+		private String name;
+		private String tel;
+		private String addr;
+		private String email;
+		private int password;
+		private String category;
 
-        // Setters
-        public void setName(String name) { this.name = name; }
-        public void setTel(String tel) { this.tel = tel; }
-    }
+		// Getters
+		public String getName() {
+			return name;
+		}
 
-    public static class FindUserEmailBynameAndTelOutputDto {
-        private String email;
+		public String getTel() {
+			return tel;
+		}
 
-        // Getter
-        public String getEmail() { return email; }
-    }
+		public String getAddr() {
+			return addr;
+		}
 
-    public static class FindUserPasswordByEmailAndNameInputDto {
-        private String email;
-        private String name;
+		public String getEmail() {
+			return email;
+		}
 
-        // Getters
-        public String getEmail() { return email; }
-        public String getName() { return name; }
+		public int getPassword() {
+			return password;
+		}
 
-        // Setters
-        public void setEmail(String email) { this.email = email; }
-        public void setName(String name) { this.name = name; }
-    }
+		public String getCategory() {
+			return category;
+		}
+		
+		// Setters
+		public void setName(String name) {
+			this.name = name;
+		}
 
-    public static class FindUserPasswordByEmailAndNameOutputDto {
-        private int password;
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
 
-        // Getter
-        public int getPassword() { return password; }
-    }
+		public void setAddr(String addr) {
+			this.addr = addr;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public void setPassword(int password) {
+			this.password = password;
+		}
+
+		public void setCategory(String category) {
+			this.category = category;
+		}
+
+	}
+
+	/**
+	 * 회원 정보를 전부 조회하기 위한 데이터(관리자)
+	 */
+	public static class ViewAllMembersInfoInputDto {
+		private long userSeq;
+
+		// Getter
+		public long getUserSeq() {
+			return userSeq;
+		}
+
+		// Setter
+		public void setUserSeq(long userSeq) {
+			this.userSeq = userSeq;
+		}
+	}
+
+	public static class ViewAllMembersInfoOutputDto {
+		private long userSeq;
+		private String name;
+		private String tel;
+		private String addr;
+		private String email;
+		private int password;
+		private String category;
+
+		// Getters
+		public long getUserSeq() {
+			return userSeq;
+		}
+		public String getName() {
+			return name;
+		}
+
+		public String getTel() {
+			return tel;
+		}
+
+		public String getAddr() {
+			return addr;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public int getPassword() {
+			return password;
+		}
+
+		public String getCategory() {
+			return category;
+		}
+
+		// Setters
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
+
+		public void setAddr(String addr) {
+			this.addr = addr;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public void setPassword(int password) {
+			this.password = password;
+		}
+
+		public void setCategory(String category) {
+			this.category = category;
+		}
+
+		public void setUserSeq(long userSeq) {
+			this.userSeq = userSeq;
+		}
+
+	}
+
+	public static class ViewOverdueMembersInputDto {
+		private long userSeq;
+
+		// Getter
+		public long getUserSeq() {
+			return userSeq;
+		}
+
+		// Setter
+		public void setUserSeq(long userSeq) {
+			this.userSeq = userSeq;
+		}
+	}
+
+	public static class ViewOverdueMembersOutputDto {
+		private long userSeq;
+		private String name;
+		private String tel;
+		private String addr;
+		private String email;
+		
+		// Getters
+		public long getUserSeq() {
+			return userSeq;
+		}
+		public String getName() {
+			return name;
+		}
+
+		public String getTel() {
+			return tel;
+		}
+
+		public String getAddr() {
+			return addr;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		// Setters
+		public void setUserSeq(long userSeq) {
+		    this.userSeq = userSeq;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
+
+		public void setAddr(String addr) {
+			this.addr = addr;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		
+	}
+
+	public static class RestrictBookLoanInputDto {
+		private long userSeq;
+
+		// Getter
+		public long getUserSeq() {
+			return userSeq;
+		}
+
+		// Setter
+		public void setUserSeq(long userSeq) {
+			this.userSeq = userSeq;
+		}
+	}
+
+	public static class RestrictBookLoanOutputDto {
+		private int restrictDate;
+
+		// Getter
+		public int getRestrictDate() {
+			return restrictDate;
+		}
+
+		// Setter
+		public void setRestrictDate(int restrictDate) {
+			this.restrictDate = restrictDate;
+		}
+	}
+
+	public static class LoginMemberInputDto {
+		private String id;
+		private int password;
+
+		// Getters
+		public String getId() {
+			return id;
+		}
+
+		public int getPassword() {
+			return password;
+		}
+
+		// Setters
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public void setPassword(int password) {
+			this.password = password;
+		}
+	}
+
+	public static class LoginMemberOutputDto {
+		private long userSeq;
+		private boolean isAdmin;
+
+		// Getters
+		public long getUserSeq() {
+			return userSeq;
+		}
+
+		public boolean isAdmin() {
+			return isAdmin;
+		}
+		
+		//Setters
+		public void setUserSeq(long userSeq) {
+			this.userSeq = userSeq;
+		}
+
+		public void setAdmin(boolean isAdmin) {
+			this.isAdmin = isAdmin;
+		}
+		
+		
+	}
+
+	public static class FindUserEmailBynameAndTelInputDto {
+		private String name;
+		private String tel;
+
+		// Getters
+		public String getName() {
+			return name;
+		}
+
+		public String getTel() {
+			return tel;
+		}
+
+		// Setters
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
+	}
+
+	public static class FindUserEmailBynameAndTelOutputDto {
+		private String email;
+
+		// Getter
+		public String getEmail() {
+			return email;
+		}
+		
+		//Setter
+		public void setEmail(String email) {
+			this.email = email;
+		}
+	}
+
+	public static class FindUserPasswordByEmailAndNameInputDto {
+		private String email;
+		private String name;
+
+		// Getters
+		public String getEmail() {
+			return email;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		// Setters
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+	}
+
+	public static class FindUserPasswordByEmailAndNameOutputDto {
+		private int password;
+
+		// Getter
+		public int getPassword() {
+			return password;
+		}
+		//Setter
+		public void setPassword(int password) {
+			this.password = password;
+		}
+	}
 }

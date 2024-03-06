@@ -17,7 +17,7 @@ public interface MemberDAO {
 	ViewMemberInfoOutputDto viewMemberInfo(long userSeq);
 
 	// 모든 회원 정보 조회 (관리자용)
-	List<ViewAllMembersInfoInputDto> viewAllMembersInfo();
+	List<ViewAllMembersInfoOutputDto> viewAllMembersInfo();
 
 	// 연체자 조회
 	List<ViewOverdueMembersOutputDto> viewOverdueMembers();
