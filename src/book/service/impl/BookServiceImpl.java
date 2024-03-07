@@ -106,7 +106,17 @@ public class BookServiceImpl implements BookService{
 		result = bookDAO.checkBook(ip);
 		return result;
 	}
-
+	
+	/**
+	 * 반납
+	 */
+	@Override
+	public ReturnBookBySeqOutputDto ReturnBookBySeq(ReturnBookBySeqInputDto ip) {
+		ReturnBookBySeqOutputDto result = new ReturnBookBySeqOutputDto();
+		result = bookDAO.returnBook(ip);
+		return null;
+	}
+	
 	@Override
 	public void RegisterBookUnrequested(RegisterBookUnrequestedInputDto ip) {
 		bookDAO.registerUnreqBook(ip);
@@ -148,12 +158,7 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public ReturnBookBySeqOutputDto ReturnBookBySeq(ReturnBookBySeqInputDto ip) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public ExtendBookLoanBySeqOutputDto ExtendBookLoanBySeq(ExtendBookLoanBySeqInputDto ip) {
