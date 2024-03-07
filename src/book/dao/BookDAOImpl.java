@@ -530,12 +530,11 @@ public class BookDAOImpl implements BookDAO{
 			
 			psUpdate = con.prepareStatement(updatesql);
 			psUpdate.setLong(1, checkbook.getBookseq());
-			psUpdate.executeUpdate();
 			
-			rs= ps.executeQuery();
+			rs= psUpdate.executeQuery();
 			
 			if(rs.next()) {
-				checkbookdto = new ManageBookRequestOutputDto();
+				checkbookdto = new CheckBookAvailabilityBySeqOutputDto();
 			}
 			
 		}catch(Exception e) {
@@ -560,7 +559,7 @@ public class BookDAOImpl implements BookDAO{
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setLong(1, returnbook.getBookseq());
-			ps.executeUpdate();	
+			rs = ps.executeQuery();	
 			
 			if(rs.next()) {
 				returnbookdto = new ReturnBookBySeqOutputDto();
@@ -571,7 +570,7 @@ public class BookDAOImpl implements BookDAO{
 		}finally {
 			DBUtil.DbClose(con, ps, rs);
 		}
-		return null;
+		return returnbookdto;
 		
 	}
 	
