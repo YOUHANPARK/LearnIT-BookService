@@ -4,7 +4,9 @@ import java.util.List;
 
 import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
+import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookByCategoryOutputDto;
@@ -14,7 +16,9 @@ import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.dto.BookDto.SearchBookByTitleOutputDto;
 import book.dto.BookDto.ViewBookRequestsInputDto;
 import book.dto.BookDto.ViewFavoriteBookInputDto;
+import book.dto.BookDto.ViewFavoriteBookOutputDto;
 import book.dto.BookDto.ViewLoanHistoryInputDto;
+import book.dto.BookDto.ViewLoanHistoryOutputDto;
 import book.service.BookService;
 import config.AppConfig;
 import view.EndView;
@@ -64,7 +68,8 @@ public class BookController {
 	 * 관심도서 조회
 	 */
 	public static void ViewFavoriteBook(ViewFavoriteBookInputDto ip) {
-		bookService.ViewFavoriteBook(ip);
+		List<ViewFavoriteBookOutputDto> favorlist = bookService.ViewFavoriteBook(ip);
+		EndView.printFavorBook(favorlist);
 	}
 	/**
 	 * 관심도서 삭제
@@ -89,13 +94,24 @@ public class BookController {
 	/**
 	 * 도서 대여 내역 확인
 	 */
-	public void viewLoanHistory(ViewLoanHistoryInputDto ip) {
-		bookService.ViewLoanHistory(ip);
+	public static void viewLoanHistory(ViewLoanHistoryInputDto ip) {
+		List<ViewLoanHistoryOutputDto> list = bookService.ViewLoanHistory(ip);
+		EndView.printLoan(list);
 	}
 	/**
 	 * 도서 대여
 	 */
-	public void loanBook(CheckBookAvailabilityBySeqInputDto ip) {
-		bookService.CheckBookAvailabilityBySeq(ip);
+	public static void loanBook(CheckBookAvailabilityBySeqInputDto ip) {
+		CheckBookAvailabilityBySeqOutputDto op;
+		op = bookService.CheckBookAvailabilityBySeq(ip);
+		System.out.println("반납 날짜: "+op.getReturndate());
+		System.out.println("남은 도서 대여 권수: "+op.getBookposbnum());
+	}
+	/**
+	 * 도서 추가(관리자)
+	 */
+	public static void registerBook(RegisterBookUnrequestedInputDto ip) {
+		bookService.RegisterBookUnrequested(ip);
+		EndView.printMessage("도서가 추가되었습니다.");
 	}
 }

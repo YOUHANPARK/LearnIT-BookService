@@ -261,6 +261,27 @@ public class MemberDto {
 			this.category = category;
 		}
 
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("ViewMemberInfoOutputDto [name=");
+			builder.append(name);
+			builder.append(", tel=");
+			builder.append(tel);
+			builder.append(", addr=");
+			builder.append(addr);
+			builder.append(", email=");
+			builder.append(email);
+			builder.append(", password=");
+			builder.append(password);
+			builder.append(", category=");
+			builder.append(category);
+			builder.append("]");
+			return builder.toString();
+		}
+		
+		
+
 	}
 
 	/**

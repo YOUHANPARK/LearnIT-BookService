@@ -1,4 +1,7 @@
 package view;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import book.controller.BookController;
@@ -6,6 +9,7 @@ import book.dto.BookDto;
 import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
@@ -26,6 +30,7 @@ public class MenuView {
 			MenuView.printMenu();
 			
 			System.out.print("메뉴 번호를 선택해주세요 : ");
+
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -42,8 +47,10 @@ public class MenuView {
 				break;
 
 			case 4:
+				System.out.println("시스템이 종료되었습니다.");
 				System.exit(0);
 			}
+			sc.nextLine();
 		}
 
 	}
@@ -77,20 +84,21 @@ public class MenuView {
 				
 			case 2:
 				// 도서 상세 검색
-				System.out.println("책 번호를 입력해주세요.");
-				System.out.println();
-				long bookseq = sc.nextInt();
+				System.out.print("책 번호를 입력해주세요: ");
+				long bookseq = sc.nextLong();
 				
 				
 				BookDto.SearchBookBySeqInputDto ip = new BookDto.SearchBookBySeqInputDto(bookseq);
 				ip.setBookseq(bookseq);
 				BookController.SearchBookBySeq(ip);
-				break;
+				
+				return;
 				
 			case 3:
-				MenuView.menu(); // 뒤로가기
+				MenuView.menu();// 뒤로가기
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 	
@@ -137,6 +145,7 @@ public class MenuView {
 				MenuView.searchBookMenu(); // 뒤로가기
 				break;
 			}
+			sc.nextLine();
 			
 		}
 	}
@@ -189,7 +198,7 @@ public class MenuView {
 	/**
 	 * 회원/관리자 여부
 	 * */
-	public static void checkManager(Session session) {
+	public static void checkManager(Session session) /*throws ParseException*/ {
 
 		if (session.getAdmin()==1) {
 			MenuView.printAdminMenu(session);
@@ -233,9 +242,11 @@ public class MenuView {
 				
 			case 7:
 				MenuView.logout(session);//로그아웃
-				break;
+				return;
 			}
+			sc.nextLine();
 		}
+		
 	}
 	/**
 	 * 로그 아웃
@@ -269,6 +280,7 @@ public class MenuView {
 				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 	/**
@@ -277,13 +289,15 @@ public class MenuView {
 	public static void loanBook(Session session) {
 		System.out.println("책 번호를 입력하세요: ");
 		long bookseq = sc.nextLong();
-		bookController.loanBook(new CheckBookAvailabilityBySeqInputDto(session.getUser_seq(),bookseq));
+		long userseq = session.getUser_seq();
+		//System.out.println(userseq);
+		BookController.loanBook(new CheckBookAvailabilityBySeqInputDto(bookseq,userseq));
 	}
 	/**
 	 * 도서 대여 내역 조회
 	 */
 	public static void viewloan(Session session) {
-		bookController.viewLoanHistory(new ViewLoanHistoryInputDto(session.getUser_seq()));
+		BookController.viewLoanHistory(new ViewLoanHistoryInputDto(session.getUser_seq()));
 	}
 	
 	/**
@@ -308,6 +322,7 @@ public class MenuView {
 				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 	/**
@@ -338,6 +353,7 @@ public class MenuView {
 			System.out.println(
 					"     " + "1. 관심도서 추가   |   2. 관심도서 리스트 조희   |  3. 관심도서 삭제   |   4. 뒤로 가기" + "     ");
 
+			System.out.print("메뉴를 선택해주세요: ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -356,6 +372,7 @@ public class MenuView {
 				MenuView.printUserMenu(session);
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 	
@@ -376,6 +393,7 @@ public class MenuView {
 	 */
 	public static void viewFavorBook(long userseq) {
 		BookController.ViewFavoriteBook(new ViewFavoriteBookInputDto(userseq));
+	
 	}
 	/**
 	 * 관심도서 삭제
@@ -393,6 +411,7 @@ public class MenuView {
 		while (true) {
 			System.out.println(" " + "1. 회원정보 조회   |   2. 회원정보 수정   |  3. ID 찾기   |   4. PASSWORD 찾기   |   5. 뒤로 가기");
 
+			System.out.print("메뉴를 선택해주세요: ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -415,6 +434,7 @@ public class MenuView {
 				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 	/**
@@ -468,7 +488,7 @@ public class MenuView {
 	/**
 	 * 관리자 메뉴
 	 */
-	public static void printAdminMenu(Session session) {
+	public static void printAdminMenu(Session session) /*throws ParseException*/{
 		while (true) {
 			System.out	  
 			.println("==========================================관리자 로그인==========================================");
@@ -476,7 +496,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				 // 대여
+				MenuView.loanBook(session);// 대여
 				break;
 
 			case 2:
@@ -486,10 +506,10 @@ public class MenuView {
 				// 연장
 				break;
 			case 4:
-				// 도서관리
+				MenuView.registerBookMenu(session);// 도서관리
 				break;
 			case 5:
-				// 관심도서
+				MenuView.addFavorBookMenu(session);// 관심도서
 				break;
 
 			case 6:
@@ -503,6 +523,7 @@ public class MenuView {
 			case 8:
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 
@@ -510,13 +531,13 @@ public class MenuView {
 	/**
 	 * 도서 관리 메뉴
 	 */
-	public static void registerBookMenu() {
+	public static void registerBookMenu(Session session) /*throws ParseException*/ {
 		while (true) {
 			System.out.println(" " + "1. 도서 추가   |   2. 요청 도서 추가   |  3. 도서 수정   |   4. 도서 삭제   |   5. 뒤로 가기");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				// 도서 추가
+				//MenuView.registerUnrBook(session);// 도서 추가
 				break;
 
 			case 2:
@@ -535,7 +556,44 @@ public class MenuView {
 				// 뒤로가기
 				break;
 			}
+			sc.nextLine();
 		}
+	}
+	/**
+	 * 도서 추가
+	 */
+	public static void registerUnrBook(Session session) throws ParseException{
+		System.out.print("책 제목: ");
+		String title = sc.nextLine();
+		System.out.print("청구 기호: ");
+		String callnum = sc.nextLine();
+		System.out.print("출판사: ");
+		String publisher = sc.nextLine();
+		System.out.print("책 소개: ");
+		String intro = sc.nextLine();
+		System.out.print("저자: ");
+		String author = sc.nextLine();
+		
+		System.out.print("출판연도: ");
+		String pubyear = sc.nextLine();
+		SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");             
+		Date dpubyear = formatter.parse(pubyear);
+		 
+		System.out.println("도서 대여가능 여부: ");
+		int loanposb = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("카테고리 이름: ");
+		String category = sc.nextLine();
+		 
+		
+		BookController.registerBook(new RegisterBookUnrequestedInputDto(title, callnum, publisher, intro,
+				author, dpubyear, loanposb, session.getUser_seq(), category));
+	}
+	/**
+	 * 도서 수정
+	 */
+	public static void updateBook(Session session) {
+		
 	}
 	
 	
@@ -572,6 +630,7 @@ public class MenuView {
 				// 뒤로가기
 				break;
 			}
+			sc.nextLine();
 		}
 	}
 

@@ -102,17 +102,17 @@ public class BookDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("SearchBookByTitleOutputDto [bookseq=");
+			builder.append("[책 번호=");
 			builder.append(bookseq);
-			builder.append(", title=");
+			builder.append(", 책 제목=");
 			builder.append(title);
-			builder.append(", booknum=");
+			builder.append(", 청구기호=");
 			builder.append(booknum);
-			builder.append(", publisher=");
+			builder.append(", 출판사=");
 			builder.append(publisher);
-			builder.append(", author=");
+			builder.append(", 저자=");
 			builder.append(author);
-			builder.append(", bookposb=");
+			builder.append(", 대여가능여부=");
 			builder.append(bookposb);
 			builder.append("]");
 			return builder.toString();
@@ -221,6 +221,25 @@ public class BookDto {
 
 		public void setBookposb(int bookposb) {
 			this.bookposb = bookposb;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("[책 번호= ");
+			builder.append(bookseq);
+			builder.append(", 책 제목= ");
+			builder.append(title);
+			builder.append(", 청구 기호= ");
+			builder.append(callnum);
+			builder.append(", 출판사= ");
+			builder.append(publisher);
+			builder.append(", 저자= ");
+			builder.append(author);
+			builder.append(", 대여가능여부= ");
+			builder.append(bookposb);
+			builder.append("]");
+			return builder.toString();
 		}
 		
 		
@@ -656,6 +675,7 @@ public class BookDto {
 		int bookposb;
 		long userseq;
 		String cartname;
+		
 		public String getTitle() {
 			return title;
 		}
@@ -1122,7 +1142,7 @@ public class BookDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("ViewLoanHistoryOutputDto [title=");
+			builder.append("[title=");
 			builder.append(title);
 			builder.append(", booknum=");
 			builder.append(booknum);

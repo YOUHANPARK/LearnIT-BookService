@@ -408,7 +408,7 @@ public class BookDAOImpl implements BookDAO{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ManageBookRequestOutputDto op = null;
+		ManageBookRequestOutputDto op=null;
 		String sql = "update 도서추가요청 set request_status='처리완료' where addbook_title=? and publisher=? and addbook_author=? and user_seq=?";
 		try {
 			con = DBUtil.getConnection();

@@ -1,9 +1,6 @@
-import book.dto.BookDto.SearchBookByTitleInputDto;
+import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.service.BookService;
 import config.AppConfig;
-import member.dto.MemberDto.LoginMemberInputDto;
-import member.dto.MemberDto.LoginMemberOutputDto;
-import member.dto.MemberDto.RegisterMemberInputDto;
 import member.service.MemberService;
 
 public class MainApp {
@@ -76,6 +73,9 @@ public class MainApp {
 					System.out.println("로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.");
 				}
 		*/
+		
+		//대여 test
+		bs.CheckBookAvailabilityBySeq(new CheckBookAvailabilityBySeqInputDto(89421220,43));
 		
 		
 	}
