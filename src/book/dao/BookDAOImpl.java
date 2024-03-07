@@ -536,7 +536,7 @@ public class BookDAOImpl implements BookDAO{
 			rs= psUpdate.executeQuery();
 			
 			if(rs.next()) {
-				checkbookdto = new CheckBookAvailabilityBySeqOutputDto();
+				checkbookdto = new CheckBookAvailabilityBySeqOutputDto(rs.getDate(1), rs.getInt(2));
 			}
 			
 		}catch(Exception e) {
@@ -558,8 +558,9 @@ public class BookDAOImpl implements BookDAO{
 		ResultSet rs = null;
 		ReturnBookBySeqOutputDto returnbookdto = new ReturnBookBySeqOutputDto();
 		String updatesql = "update 책 set loan_possible = loan_possible + 1 where loan_possible = 0 and book_seq = ?";
-		String deletesql = "delete from 대여 where user_seq = ?"; //borrow_seq = ? and 
-		
+		String deletesql = "delete from 대여 b1 join 대여상세 b2 on b1.borrow_seq = b2.borrow_seq where user_seq = ?"; //borrow_seq = ? and 
+								//delete from 대여 where borrow_seq = (select borrow_seq from 대여상세)user_seq = ?
+							
 		try {
 			con = DBUtil.getConnection();
 			psUpdate = con.prepareStatement(updatesql);
@@ -567,7 +568,6 @@ public class BookDAOImpl implements BookDAO{
 			psUpdate.executeUpdate();
 			
 			psDelete = con.prepareStatement(deletesql);
-			//psDelete.setLong(1, returnbook.);
 			psDelete.setLong(1, returnbook.getUserseq());
 			rs = psDelete.executeQuery();	
 			
