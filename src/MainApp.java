@@ -1,3 +1,7 @@
+import java.util.List;
+
+import book.dto.BookDto.RecommendBookInputDto;
+import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.service.BookService;
 import config.AppConfig;
@@ -19,7 +23,7 @@ public class MainApp {
 		
 		MemberService ms = ac.getMemberService();
 		BookService bs =  ac.getBookService();
-		System.out.println("tlfgod");
+		System.out.println("테스트 시작");
 		//System.out.println(bs.findAllBook(null).toArray()[0].toString());
 		//bs.SearchBookByTitle(new SearchBookByTitleInputDto());
 		//System.out.println(bs.SearchBookBySeq(new SearchBookBySeqInputDto(105280932)).toString());
@@ -77,6 +81,11 @@ public class MainApp {
 				}
 		*/
 		
+		//책 추천 기능 예시
 		
+		List<RecommendBookOutputDto> rb = bs.RecommendBook(new RecommendBookInputDto(1));
+		for (RecommendBookOutputDto r : rb) {
+			System.out.println(r.toString());
+		}
 	}
 }
