@@ -9,6 +9,7 @@ import book.dto.BookDto;
 import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
@@ -214,6 +215,8 @@ public class MenuView {
 	public static void printUserMenu(Session session) {
 		while (true) {
 			
+			MenuView.recommendBook(session);
+			
 			System.out.println(
 					"==========================================회원 로그인==========================================");
 			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회   |   7. 로그아웃");
@@ -247,6 +250,12 @@ public class MenuView {
 			sc.nextLine();
 		}
 		
+	}
+	/**
+	 * 도서 추천
+	 */
+	public static void recommendBook(Session session) {
+		BookController.recommendBook(new RecommendBookInputDto(session.getUser_seq()));
 	}
 	/**
 	 * 로그 아웃
@@ -325,6 +334,7 @@ public class MenuView {
 			sc.nextLine();
 		}
 	}
+	
 	/**
 	 * 도서 요청
 	 */

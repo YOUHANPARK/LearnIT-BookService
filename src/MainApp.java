@@ -89,10 +89,10 @@ public class MainApp {
 //=======
 		//책 추천 기능 예시
 //>>>>>>> 2b52f6fcf62da9998a127c030a7f0d2000b4ebd1
-		/*
+		
 		List<RecommendBookOutputDto> rb = bs.RecommendBook(new RecommendBookInputDto(1));
 		for (RecommendBookOutputDto r : rb) {
 			System.out.println(r.toString());
-		}*/
+		}
 	}
 }

@@ -1,7 +1,7 @@
 package view;
 import java.util.List;
 
-import book.dto.BookDto;
+import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.SearchBookByCategoryOutputDto;
 import book.dto.BookDto.SearchBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByTitleOutputDto;
@@ -74,5 +74,15 @@ public class EndView {
     		System.out.println(book);
     	}
     	System.out.println("----------------------------------------------------");
+    }
+    /**
+     * 도서 추천
+     */
+    public static void printRecommend(List<RecommendBookOutputDto> list) {
+    	System.out.println("-----------추천 도서 목록--------------");
+    	for(RecommendBookOutputDto book:list) {
+    		System.out.println(book);
+    	}
+    	System.out.println("---------------------------------------");
     }
 }

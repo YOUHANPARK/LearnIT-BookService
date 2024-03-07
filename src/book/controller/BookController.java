@@ -6,6 +6,8 @@ import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RecommendBookInputDto;
+import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
@@ -113,5 +115,12 @@ public class BookController {
 	public static void registerBook(RegisterBookUnrequestedInputDto ip) {
 		bookService.RegisterBookUnrequested(ip);
 		EndView.printMessage("도서가 추가되었습니다.");
+	}
+	/**
+	 * 도서 추천
+	 */
+	public static void recommendBook(RecommendBookInputDto ip) {
+		List<RecommendBookOutputDto> list = bookService.RecommendBook(ip);
+		EndView.printRecommend(list);
 	}
 }
