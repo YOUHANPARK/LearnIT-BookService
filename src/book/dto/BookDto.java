@@ -1165,24 +1165,27 @@ public class BookDto {
 	
 	public static class RecommendBookInputDto{
 		long userseq;
-		long ratingseq;
 		
+		public RecommendBookInputDto() {
+			
+		}
+
+		public RecommendBookInputDto(long userseq) {
+			
+			this.userseq = userseq;
+		}
 		public long getUserseq() {
 			return userseq;
 		}
 		public void setUserseq(long userseq) {
 			this.userseq = userseq;
 		}
-		public long getRatingseq() {
-			return ratingseq;
-		}
-		public void setRatingseq(long ratingseq) {
-			this.ratingseq = ratingseq;
-		}
+		
 		
 		
 	}
 	public static class RecommendBookOutputDto{
+		int score;
 		String title;
 		String booknum;
 		String publisher;
@@ -1194,9 +1197,10 @@ public class BookDto {
 			super();
 		}
 
-		public RecommendBookOutputDto(String title, String booknum, String publisher, String author, Date pubyear,
+		public RecommendBookOutputDto(int score, String title, String booknum, String publisher, String author, Date pubyear,
 				int bookposb) {
 			super();
+			this.score = score;
 			this.title = title;
 			this.booknum = booknum;
 			this.publisher = publisher;
@@ -1252,6 +1256,15 @@ public class BookDto {
 		public void setBookposb(int bookposb) {
 			this.bookposb = bookposb;
 		}
+
+		@Override
+		public String toString() {
+		    String loanStatus = bookposb == 1 ? "가능" : "불가능";
+		    return String.format("별점 = %-4s, 제목 = %-25s, 청구기호 = %-8s, 출판사 = %-15s, 작가 = %-4s, 출판연도 = %-4s, 대여가능여부 = %-3s",
+		                         score, title, booknum, publisher, author, pubyear, loanStatus);
+		}
+
+
 		
 	}
 	

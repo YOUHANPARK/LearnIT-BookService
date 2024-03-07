@@ -1,4 +1,12 @@
+//<<<<<<< HEAD
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
+//=======
+import java.util.List;
+
+import book.dto.BookDto.RecommendBookInputDto;
+import book.dto.BookDto.RecommendBookOutputDto;
+import book.dto.BookDto.SearchBookByTitleInputDto;
+//>>>>>>> 2b52f6fcf62da9998a127c030a7f0d2000b4ebd1
 import book.service.BookService;
 import config.AppConfig;
 import member.service.MemberService;
@@ -16,7 +24,7 @@ public class MainApp {
 		
 		MemberService ms = ac.getMemberService();
 		BookService bs =  ac.getBookService();
-		System.out.println("tlfgod");
+		System.out.println("테스트 시작");
 		//System.out.println(bs.findAllBook(null).toArray()[0].toString());
 		//bs.SearchBookByTitle(new SearchBookByTitleInputDto());
 		//System.out.println(bs.SearchBookBySeq(new SearchBookBySeqInputDto(105280932)).toString());
@@ -74,9 +82,17 @@ public class MainApp {
 				}
 		*/
 		
+//<<<<<<< HEAD
 		//대여 test
-		bs.CheckBookAvailabilityBySeq(new CheckBookAvailabilityBySeqInputDto(89421220,43));
+		//bs.CheckBookAvailabilityBySeq(new CheckBookAvailabilityBySeqInputDto(89421220,43));
 		
-		
+//=======
+		//책 추천 기능 예시
+//>>>>>>> 2b52f6fcf62da9998a127c030a7f0d2000b4ebd1
+		/*
+		List<RecommendBookOutputDto> rb = bs.RecommendBook(new RecommendBookInputDto(1));
+		for (RecommendBookOutputDto r : rb) {
+			System.out.println(r.toString());
+		}*/
 	}
 }

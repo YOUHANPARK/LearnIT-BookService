@@ -179,8 +179,8 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public List<RecommendBookOutputDto> RecommendBook(RecommendBookInputDto ip) {
-		return bookDAO.recommendBook(ip);
+	public List<RecommendBookOutputDto> RecommendBook(RecommendBookInputDto rb) {
+		return bookDAO.recommendBook(rb);
 	}
 
 }
