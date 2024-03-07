@@ -1,18 +1,23 @@
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.service.BookService;
 import config.AppConfig;
+import member.dto.MemberDto.LoginMemberInputDto;
+import member.dto.MemberDto.LoginMemberOutputDto;
+import member.dto.MemberDto.RegisterMemberInputDto;
+import member.service.MemberService;
 
 public class MainApp {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		run();
-		
+
 	}
 
 	private static void run() {
 		AppConfig ac = new AppConfig();
 		
+		MemberService ms = ac.getMemberService();
 		BookService bs =  ac.getBookService();
 		System.out.println("tlfgod");
 		//System.out.println(bs.findAllBook(null).toArray()[0].toString());
@@ -43,5 +48,34 @@ public class MainApp {
 		for(int i=1; i<=5; i++) {
 			System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("스마트",1)).toArray()[i].toString());
 		}*/
+		
+		
+		
+////		//회원 가입 예시
+//		RegisterMemberInputDto newMember 
+//		= new RegisterMemberInputDto("gg","010-1234-5678","Seoul, Korea","gg@example.com","1234",null);
+//		
+//		try {
+//			ms.RegisterMember(newMember);
+//			System.out.println("회원가입이 완료되었습니다.");
+//			} catch (Exception e) {
+//				System.out.println("회원가입에 실패했습니다. 다시 시도해주세요.");
+//			}
+		
+		
+		
+		//로그인 기능 예시
+				LoginMemberInputDto loginInfo = new LoginMemberInputDto("johndoe@example.com","password123");
+				
+				LoginMemberOutputDto loginMember = ms.loginMember(loginInfo);
+				if (loginMember != null) {
+					System.out.println("로그인 성공: " + loginMember.getName() + "님 환영합니다.");
+					System.out.println("관리자여부: " + loginMember.isAdmin());
+				} else {
+					System.out.println("로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.");
+				}
+		
+		
+		
 	}
 }

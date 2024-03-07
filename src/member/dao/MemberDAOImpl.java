@@ -26,18 +26,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public static void main(String[] args) {
 		MemberDAOImpl memberDAO = new MemberDAOImpl();
 
-//		 // 회원 가입 예시
-//		    RegisterMemberInputDto newMember = new RegisterMemberInputDto();
-//		    newMember.setName("cc");
-//		    newMember.setTel("010-1234-5678"); 
-//		    newMember.setAddr("Seoul, Korea");
-//		    newMember.setEmail("cc@example.com");
-//		    newMember.setPassword("bear");
-//		    updateInfo.setCategory(null);
-//		    memberDAO.registerMember(newMember);
-//		    
-//		    System.out.println("회원가입이 완료되었습니다.");
-
 //		  //회원 정보 수정 예시
 //		    UpdateMemberInfoForMemInputDto updateInfo = new UpdateMemberInfoForMemInputDto();
 //		    updateInfo.setUser_seq(22L); // 가정: user_seq가 1인 회원
@@ -86,16 +74,7 @@ public class MemberDAOImpl implements MemberDAO {
 //		List<ViewOverdueMembersOutputDto> overdueMembers = memberDAO
 //				.viewOverdueMembers(new ViewOverdueMembersInputDto());
 		
-		//로그인 기능 확인
-		LoginMemberInputDto loginInfo = new LoginMemberInputDto();
-		loginInfo.setEmail("johndoe@example.com");
-		loginInfo.setPassword("password123");
-		LoginMemberOutputDto member = memberDAO.login(loginInfo);
-		if (member != null) {
-			System.out.println("로그인 성공: " + member.getName() + "님 환영합니다.");
-		} else {
-			System.out.println("로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.");
-		}
+		
 }
 
 		

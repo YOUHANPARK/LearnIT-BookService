@@ -2,61 +2,65 @@ package member.service;
 
 import java.util.List;
 
-import member.dto.MemberDto.FindUserEmailBynameAndTelInputDto;
-import member.dto.MemberDto.FindUserEmailBynameAndTelOutputDto;
-import member.dto.MemberDto.FindUserPasswordByEmailAndNameInputDto;
-import member.dto.MemberDto.FindUserPasswordByEmailAndNameOutputDto;
-import member.dto.MemberDto.LoginMemberInputDto;
-import member.dto.MemberDto.LoginMemberOutputDto;
-import member.dto.MemberDto.RegisterMemberInputDto;
-import member.dto.MemberDto.RestrictBookLoanInputDto;
-import member.dto.MemberDto.RestrictBookLoanOutputDto;
-import member.dto.MemberDto.UpdateMemberInfoForMemInputDto;
-import member.dto.MemberDto.ViewAllMembersInfoInputDto;
-import member.dto.MemberDto.ViewAllMembersInfoOutputDto;
-import member.dto.MemberDto.ViewMemberInfoInputDto;
-import member.dto.MemberDto.ViewMemberInfoOutputDto;
-import member.dto.MemberDto.ViewOverdueMembersInputDto;
-import member.dto.MemberDto.ViewOverdueMembersOutputDto;
+import member.dao.MemberDAO;
+import member.dto.MemberDto.*;
+import view.EndView;
 
 public class MemberServiceImpl implements MemberService {
-	
-	
+
+	private final MemberDAO MemberDAO;
+
+	public MemberServiceImpl(MemberDAO MemberDAO) {
+		this.MemberDAO = MemberDAO;
+	}
+
+	// 회원가입
 	public void RegisterMember(RegisterMemberInputDto registermember) {
+		MemberDAO.registerMember(registermember);
+	};
+
+	// 로그인
+	public LoginMemberOutputDto loginMember(LoginMemberInputDto loginmember) {
+		LoginMemberOutputDto loginResult = MemberDAO.login(loginmember);
+		
+		return loginResult;
+	};
+
+	// 회원정보수정
+	public void UpdateMemberInfoForMem(UpdateMemberInfoForMemInputDto updatemember) {
+		MemberDAO.updateMemberInfo(updatemember);
 		
 	};
 
-	public void UpdateMemberInfoForMem(UpdateMemberInfoForMemInputDto updatemember ) {};
-	
-	
+	// 회원정보조회
 	public ViewMemberInfoOutputDto viewMemberInfoForMem(ViewMemberInfoInputDto viewmember) {
-		return null;};
-	
-	
+		return null;
+	};
+
+	// 모든회원정보조회
 	public ViewAllMembersInfoOutputDto viewAllMembersInfoByName(ViewAllMembersInfoInputDto viewallmember) {
-		return null;};
-	
-	
+		return null;
+	};
+
+	// 연체자조회
 	public List<ViewOverdueMembersOutputDto> viewOverdueMembers(ViewOverdueMembersInputDto viewovermember) {
-		return null;};
-	
-	
+		return null;
+	};
+
 	public RestrictBookLoanOutputDto restrictBook(RestrictBookLoanInputDto restirct) {
-		return null;};
-	
-	
-	public LoginMemberOutputDto loginMember(LoginMemberInputDto login) {
-		return null;};
-	
-	
-	public void Logout() {};
-	
-	
+		return null;
+	};
+
+	public void Logout() {
+	};
+
 	public FindUserEmailBynameAndTelOutputDto FindUserEmailBynameAndTel(FindUserEmailBynameAndTelInputDto userid) {
-		return null;};
-	
-	
-	public FindUserPasswordByEmailAndNameOutputDto FindUserPasswordByEmailAndName(FindUserPasswordByEmailAndNameInputDto userpassword) {
-		return null;};
+		return null;
+	};
+
+	public FindUserPasswordByEmailAndNameOutputDto FindUserPasswordByEmailAndName(
+			FindUserPasswordByEmailAndNameInputDto userpassword) {
+		return null;
+	};
 
 }

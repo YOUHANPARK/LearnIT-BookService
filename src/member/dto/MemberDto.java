@@ -16,7 +16,19 @@ public class MemberDto {
 		private String email;
 		private String password;
 		private String category;
+		
+		public RegisterMemberInputDto() {
 
+		}
+
+		public RegisterMemberInputDto(String name, String tel, String addr, String email, String password, String category) {
+			this.name = name;
+			this.tel = tel;
+			this.addr = addr;
+			this.email = email;
+			this.password = password;
+			this.category = category;
+		}
 		// Getters
 		public long getUser_seq() {
 			return user_seq;
@@ -409,6 +421,15 @@ public class MemberDto {
 		private String email;
 		private String password;
 
+		public LoginMemberInputDto() {
+
+		}
+		
+		public LoginMemberInputDto(String email, String password) {
+			this.email = email;
+			this.password = password;
+		}
+		
 		// Getters
 		public String getEmail() {
 			return this.email;
@@ -433,6 +454,7 @@ public class MemberDto {
 		private long userSeq;
 		private String name;
 		private boolean isAdmin;
+		
 
 		// Getters
 		public long getUserSeq() {
