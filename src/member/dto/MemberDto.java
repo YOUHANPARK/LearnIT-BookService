@@ -406,30 +406,32 @@ public class MemberDto {
 	}
 
 	public static class LoginMemberInputDto {
-		private String id;
-		private int password;
+		private String email;
+		private String password;
 
 		// Getters
-		public String getId() {
-			return id;
+		public String getEmail() {
+			return this.email;
 		}
 
-		public int getPassword() {
+		public String getPassword() {
 			return password;
 		}
 
 		// Setters
-		public void setId(String id) {
-			this.id = id;
+		public void setEmail(String id) {
+			this.email= email;
 		}
 
-		public void setPassword(int password) {
+		public void setPassword(String password) {
 			this.password = password;
 		}
 	}
+	
 
 	public static class LoginMemberOutputDto {
 		private long userSeq;
+		private String name;
 		private boolean isAdmin;
 
 		// Getters
@@ -440,6 +442,10 @@ public class MemberDto {
 		public boolean isAdmin() {
 			return isAdmin;
 		}
+		
+		public String getName() {
+			return name;
+		}
 
 		// Setters
 		public void setUserSeq(long userSeq) {
@@ -448,6 +454,10 @@ public class MemberDto {
 
 		public void setAdmin(boolean isAdmin) {
 			this.isAdmin = isAdmin;
+		}
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 
 	}
