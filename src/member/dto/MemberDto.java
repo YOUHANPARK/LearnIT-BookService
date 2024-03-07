@@ -40,7 +40,8 @@ public class MemberDto {
 		public String getCategory() {
 			return category;
 		}
-
+		
+	
 		// Setters
 
 		public void setName(String name) {
@@ -484,12 +485,8 @@ public class MemberDto {
 
 	public static class LoginMemberOutputDto {
 		private long userSeq;
-//<<<<<<< HEAD
 		private int isAdmin;
-//=======
 		private String name;
-		
-//>>>>>>> 95586a2b9e4bc747e9d5b51c586d7ece2aca0efd
 
 		// Getters
 		public long getUserSeq() {
