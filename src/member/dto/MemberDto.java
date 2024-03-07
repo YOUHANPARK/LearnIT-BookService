@@ -14,7 +14,7 @@ public class MemberDto {
 		private String email;
 		private String password;
 		private String category;
-
+		
 		// Getters
 
 		public String getName() {
@@ -447,24 +447,24 @@ public class MemberDto {
 	 * 로그인
 	 */
 	public static class LoginMemberInputDto {
-		private String id;
-		private int password;
-
+		private String email;
+		private String password;
+		
 		// Getters
-		public String getId() {
-			return id;
+		public String getEmail() {
+			return this.email;
 		}
 
-		public int getPassword() {
+		public String getPassword() {
 			return password;
 		}
 
 		// Setters
-		public void setId(String id) {
-			this.id = id;
+		public void setEmail(String email) {
+			this.email= email;
 		}
 
-		public void setPassword(int password) {
+		public void setPassword(String password) {
 			this.password = password;
 		}
 
@@ -472,18 +472,24 @@ public class MemberDto {
 			super();
 		}
 
-		public LoginMemberInputDto(String id, int password) {
+		public LoginMemberInputDto(String id, String password) {
 			super();
-			this.id = id;
+			this.email = id;
 			this.password = password;
 		}
 		
 		
 	}
+	
 
 	public static class LoginMemberOutputDto {
 		private long userSeq;
+//<<<<<<< HEAD
 		private int isAdmin;
+//=======
+		private String name;
+		
+//>>>>>>> 95586a2b9e4bc747e9d5b51c586d7ece2aca0efd
 
 		// Getters
 		public long getUserSeq() {
@@ -493,6 +499,10 @@ public class MemberDto {
 		public int getAdmin() {
 			return isAdmin;
 		}
+		
+		public String getName() {
+			return name;
+		}
 
 		// Setters
 		public void setUserSeq(long userSeq) {
@@ -501,6 +511,10 @@ public class MemberDto {
 
 		public void setAdmin(int isAdmin) {
 			this.isAdmin = isAdmin;
+		}
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 
 	}

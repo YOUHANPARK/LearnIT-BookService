@@ -23,11 +23,11 @@ public class AppConfig {
 	private final MemberService memberService;
 	private final MemberDAO memberDAO;;
 
-	private AppConfig() {
+	public AppConfig() {
 		bookDAO = new BookDAOImpl();
 		bookService = new BookServiceImpl(bookDAO);
 		memberDAO = new MemberDAOImpl();
-		memberService = new MemberServiceImpl();
+		memberService = new MemberServiceImpl(memberDAO);
 	}
 
 	public static AppConfig getInstance() {

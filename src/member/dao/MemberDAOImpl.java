@@ -26,18 +26,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public static void main(String[] args) {
 		MemberDAOImpl memberDAO = new MemberDAOImpl();
 
-//		 // 회원 가입 예시
-//		    RegisterMemberInputDto newMember = new RegisterMemberInputDto();
-//		    newMember.setName("cc");
-//		    newMember.setTel("010-1234-5678"); 
-//		    newMember.setAddr("Seoul, Korea");
-//		    newMember.setEmail("cc@example.com");
-//		    newMember.setPassword("bear");
-//		    updateInfo.setCategory(null);
-//		    memberDAO.registerMember(newMember);
-//		    
-//		    System.out.println("회원가입이 완료되었습니다.");
-
 //		  //회원 정보 수정 예시
 //		    UpdateMemberInfoForMemInputDto updateInfo = new UpdateMemberInfoForMemInputDto();
 //		    updateInfo.setUser_seq(22L); // 가정: user_seq가 1인 회원
@@ -64,7 +52,7 @@ public class MemberDAOImpl implements MemberDAO {
 //		} else {
 //			System.out.println("회원 정보를 찾을 수 없습니다.");
 //		}
-		
+
 //		List<ViewAllMembersInfoOutputDto> allMembers = memberDAO.viewAllMembersInfo();
 //	    
 //	    if (!allMembers.isEmpty()) {
@@ -82,8 +70,14 @@ public class MemberDAOImpl implements MemberDAO {
 //	        System.out.println("등록된 회원 정보가 없습니다.");
 //	    }
 
-	}
+//		// 연체자 조회 기능 확인(잘 안 됨)
+//		List<ViewOverdueMembersOutputDto> overdueMembers = memberDAO
+//				.viewOverdueMembers(new ViewOverdueMembersInputDto());
+		
+		
+}
 
+		
 	// 회원 가입
 	@Override
 	public void registerMember(RegisterMemberInputDto member) {
@@ -114,7 +108,7 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.setString(2, member.getTel());
 			pstmt.setString(3, member.getAddr());
 			pstmt.setString(4, member.getEmail());
-			pstmt.setInt(5, member.getPassword());
+			pstmt.setString(5, member.getPassword());
 			pstmt.setString(6, member.getCategory());
 			pstmt.setLong(7, member.getUser_seq());
 			int affectedRows = pstmt.executeUpdate();
@@ -152,66 +146,61 @@ public class MemberDAOImpl implements MemberDAO {
 	// 모든 회원 정보 조회 (관리자용)
 	@Override
 	public List<ViewAllMembersInfoOutputDto> viewAllMembersInfo() {
-		 List<ViewAllMembersInfoOutputDto> membersList = new ArrayList<>();
-		    String sql = "SELECT USER_SEQ, NAME, TEL, ADDR, EMAIL, CATEGORY FROM 회원";
-		    
-		    try (Connection conn = DBUtil.getConnection(); 
-		         PreparedStatement pstmt = conn.prepareStatement(sql);
-		         ResultSet rs = pstmt.executeQuery()) {
-		        
-		        while (rs.next()) {
-		        	ViewAllMembersInfoOutputDto memberInfo = new ViewAllMembersInfoOutputDto();
-		            memberInfo.setUserSeq(rs.getLong("USER_SEQ"));
-		            memberInfo.setName(rs.getString("NAME"));
-		            memberInfo.setTel(rs.getString("TEL"));
-		            memberInfo.setAddr(rs.getString("ADDR"));
-		            memberInfo.setEmail(rs.getString("EMAIL"));
-		            memberInfo.setCategory(rs.getString("CATEGORY"));
-		            membersList.add(memberInfo);
-		        }
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
+		List<ViewAllMembersInfoOutputDto> membersList = new ArrayList<>();
+		String sql = "SELECT USER_SEQ, NAME, TEL, ADDR, EMAIL, CATEGORY FROM 회원";
+
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+
+			while (rs.next()) {
+				ViewAllMembersInfoOutputDto memberInfo = new ViewAllMembersInfoOutputDto();
+				memberInfo.setUserSeq(rs.getLong("USER_SEQ"));
+				memberInfo.setName(rs.getString("NAME"));
+				memberInfo.setTel(rs.getString("TEL"));
+				memberInfo.setAddr(rs.getString("ADDR"));
+				memberInfo.setEmail(rs.getString("EMAIL"));
+				memberInfo.setCategory(rs.getString("CATEGORY"));
+				membersList.add(memberInfo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return membersList;
 	};
-	//관리자 여부 확인
+
+	// 관리자 여부 확인
 	@Override
 	public boolean isAdmin(long userSeq) {
 		return false;
 	};
-	
+
 	// 연체자 조회
 	@Override
 	public List<ViewOverdueMembersOutputDto> viewOverdueMembers(ViewOverdueMembersInputDto viewOvermember) {
 		List<ViewOverdueMembersOutputDto> overdueMembersList = new ArrayList<>();
-		
-		
-	    // 예시 SQL 쿼리: 연체 상태인 회원 정보 조회
-	    String sql = "SELECT ds.expectedreturn_date , d.user_seq , u.name , b.book_title\r\n"
-	    		+ "FROM 대여상세 ds , 대여 d , 회원 u , 책 b\r\n"
-	    		+ "WHERE (((ds.expectedreturn_date <= TO_DATE('2024.03.06','YYYY.MM.DD')\r\n"
-	    		+ "AND d.borrow_seq = ds.borrow_seq) AND d.user_seq = u.user_seq)\r\n"
-	    		+ "AND b.book_seq = ds.book_seq)\r\n"
-	    		+ "AND b.loan_possible = 0";
-	    
-	    try (Connection conn = DBUtil.getConnection(); 
-	         PreparedStatement pstmt = conn.prepareStatement(sql);
-	         ResultSet rs = pstmt.executeQuery()) {
-	        
-	        while (rs.next()) {
-	            ViewOverdueMembersOutputDto overdueMemberInfo = new ViewOverdueMembersOutputDto();
-	            overdueMemberInfo.setUserSeq(rs.getLong("USER_SEQ"));
-	            overdueMemberInfo.setName(rs.getString("NAME"));
-	            overdueMemberInfo.setTel(rs.getString("TEL"));
-	            overdueMemberInfo.setAddr(rs.getString("ADDR"));
-	            overdueMemberInfo.setEmail(rs.getString("EMAIL"));
-	            overdueMembersList.add(overdueMemberInfo);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    
-	    return overdueMembersList;
+
+		String sql = "SELECT ds.expectedreturn_date , d.user_seq , u.name , b.book_title\r\n"
+				+ "FROM 대여상세 ds , 대여 d , 회원 u , 책 b\r\n"
+				+ "WHERE (((ds.expectedreturn_date <= TO_DATE('2024.03.06','YYYY.MM.DD')\r\n"
+				+ "AND d.borrow_seq = ds.borrow_seq) AND d.user_seq = u.user_seq)\r\n"
+				+ "AND b.book_seq = ds.book_seq)\r\n" + "AND b.loan_possible = 0";
+
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+
+			while (rs.next()) {
+				ViewOverdueMembersOutputDto overdueMemberInfo = new ViewOverdueMembersOutputDto();
+				overdueMemberInfo.setUserSeq(rs.getLong("USER_SEQ"));
+
+				overdueMembersList.add(overdueMemberInfo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return overdueMembersList;
 	};
 
 	// 도서 연체 제한 설정
@@ -222,6 +211,24 @@ public class MemberDAOImpl implements MemberDAO {
 	// 로그인
 	@Override
 	public LoginMemberOutputDto login(LoginMemberInputDto loginInfo) {
+		try {
+			String sql = "SELECT USER_SEQ, NAME,IS_ADMIN FROM 회원 WHERE EMAIL = ? AND PASSWORD = ?";
+			Connection conn = DBUtil.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loginInfo.getEmail());
+			pstmt.setString(2, loginInfo.getPassword());
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				LoginMemberOutputDto member = new LoginMemberOutputDto();
+				member.setUserSeq(rs.getLong("USER_SEQ"));
+				member.setName(rs.getString("NAME"));
+				member.setAdmin(rs.getInt("IS_ADMIN"));
+				System.out.println(member);
+				return member;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	};
 
@@ -237,5 +244,5 @@ public class MemberDAOImpl implements MemberDAO {
 			FindUserPasswordByEmailAndNameInputDto userInfo) {
 		return null;
 	};
-	
+
 }

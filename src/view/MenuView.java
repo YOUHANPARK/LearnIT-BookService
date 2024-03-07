@@ -151,7 +151,7 @@ public class MenuView {
 		 String id = sc.nextLine();
 		 
 		 System.out.print("비밀번호 : ");
-		 int password = sc.nextInt();
+		 String password = sc.nextLine();
 		 
 		 SessionSet ss = SessionSet.getInstance();
 		 Session session = MemberController.login(id, password);
