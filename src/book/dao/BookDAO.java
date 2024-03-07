@@ -78,7 +78,7 @@ public interface BookDAO {
 	
 	CheckBookAvailabilityBySeqOutputDto checkBook(CheckBookAvailabilityBySeqInputDto checkbook);
 	
-	ReturnBookBySeqOutputDto ReturnBook(ReturnBookBySeqInputDto returnbook);
+	ReturnBookBySeqOutputDto returnBook(ReturnBookBySeqInputDto returnbook);
 	
 	void registerUnreqBook(RegisterBookUnrequestedInputDto registerbook);
 	void registerReqBook(RegisterBookRequestedInputDto registerbook);
