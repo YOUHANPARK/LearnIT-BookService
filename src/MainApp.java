@@ -1,13 +1,14 @@
+//<<<<<<< HEAD
+import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
+//=======
 import java.util.List;
 
 import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
+//>>>>>>> 2b52f6fcf62da9998a127c030a7f0d2000b4ebd1
 import book.service.BookService;
 import config.AppConfig;
-import member.dto.MemberDto.LoginMemberInputDto;
-import member.dto.MemberDto.LoginMemberOutputDto;
-import member.dto.MemberDto.RegisterMemberInputDto;
 import member.service.MemberService;
 
 public class MainApp {
@@ -81,7 +82,13 @@ public class MainApp {
 				}
 		*/
 		
+//<<<<<<< HEAD
+		//대여 test
+		//bs.CheckBookAvailabilityBySeq(new CheckBookAvailabilityBySeqInputDto(89421220,43));
+		
+//=======
 		//책 추천 기능 예시
+//>>>>>>> 2b52f6fcf62da9998a127c030a7f0d2000b4ebd1
 		
 		List<RecommendBookOutputDto> rb = bs.RecommendBook(new RecommendBookInputDto(1));
 		for (RecommendBookOutputDto r : rb) {

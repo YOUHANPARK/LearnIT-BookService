@@ -1,10 +1,15 @@
 package session;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class SessionSet {
 	private static SessionSet ss = new SessionSet();
 	private Set<Session> set;
+	
+	private SessionSet() {
+		set = new HashSet<Session>();
+	}
 	
 	public static SessionSet getInstance() {
 		return ss;
