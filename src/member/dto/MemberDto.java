@@ -8,8 +8,6 @@ public class MemberDto {
 	 * 회원가입을 위한 데이터
 	 */
 	public static class RegisterMemberInputDto {
-		private long user_seq;
-
 		private String name;
 		private String tel;
 		private String addr;
@@ -18,9 +16,6 @@ public class MemberDto {
 		private String category;
 
 		// Getters
-		public long getUser_seq() {
-			return user_seq;
-		}
 
 		public String getName() {
 			return name;
@@ -47,9 +42,6 @@ public class MemberDto {
 		}
 
 		// Setters
-		public void setUser_seq(long user_seq) {
-			this.user_seq = user_seq;
-		}
 
 		public void setName(String name) {
 			this.name = name;
@@ -75,6 +67,23 @@ public class MemberDto {
 			this.category = category;
 		}
 
+		public RegisterMemberInputDto() {
+			super();
+		}
+
+		public RegisterMemberInputDto(String name, String tel, String addr, String email,
+				String password, String category) {
+			super();
+			this.name = name;
+			this.tel = tel;
+			this.addr = addr;
+			this.email = email;
+			this.password = password;
+			this.category = category;
+		}
+		
+		
+
 	}
 
 	/**
@@ -85,7 +94,7 @@ public class MemberDto {
 		private String tel;
 		private String addr;
 		private String email;
-		private int password;
+		private String password;
 		private String category;
 		private long user_seq;
 
@@ -106,7 +115,7 @@ public class MemberDto {
 			return email;
 		}
 
-		public int getPassword() {
+		public String getPassword() {
 			return password;
 		}
 
@@ -135,7 +144,7 @@ public class MemberDto {
 			this.email = email;
 		}
 
-		public void setPassword(int password) {
+		public void setPassword(String password) {
 			this.password = password;
 		}
 
@@ -146,6 +155,24 @@ public class MemberDto {
 		public void setUser_seq(long user_seq) {
 			this.user_seq = user_seq;
 		}
+
+		public UpdateMemberInfoForMemInputDto() {
+			super();
+		}
+
+		public UpdateMemberInfoForMemInputDto(String name, String tel, String addr, String email, String password,
+				String category, long user_seq) {
+			super();
+			this.name = name;
+			this.tel = tel;
+			this.addr = addr;
+			this.email = email;
+			this.password = password;
+			this.category = category;
+			this.user_seq = user_seq;
+		}
+		
+		
 	}
 
 	/**
@@ -163,6 +190,17 @@ public class MemberDto {
 		public void setUserSeq(long userSeq) {
 			this.userSeq = userSeq;
 		}
+
+		public ViewMemberInfoInputDto() {
+			super();
+		}
+
+		public ViewMemberInfoInputDto(long userSeq) {
+			super();
+			this.userSeq = userSeq;
+		}
+		
+		
 	}
 
 	public static class ViewMemberInfoOutputDto {
@@ -405,6 +443,9 @@ public class MemberDto {
 		}
 	}
 
+	/**
+	 * 로그인
+	 */
 	public static class LoginMemberInputDto {
 		private String id;
 		private int password;
@@ -426,18 +467,30 @@ public class MemberDto {
 		public void setPassword(int password) {
 			this.password = password;
 		}
+
+		public LoginMemberInputDto() {
+			super();
+		}
+
+		public LoginMemberInputDto(String id, int password) {
+			super();
+			this.id = id;
+			this.password = password;
+		}
+		
+		
 	}
 
 	public static class LoginMemberOutputDto {
 		private long userSeq;
-		private boolean isAdmin;
+		private int isAdmin;
 
 		// Getters
 		public long getUserSeq() {
 			return userSeq;
 		}
 
-		public boolean isAdmin() {
+		public int getAdmin() {
 			return isAdmin;
 		}
 
@@ -446,7 +499,7 @@ public class MemberDto {
 			this.userSeq = userSeq;
 		}
 
-		public void setAdmin(boolean isAdmin) {
+		public void setAdmin(int isAdmin) {
 			this.isAdmin = isAdmin;
 		}
 
@@ -473,6 +526,17 @@ public class MemberDto {
 		public void setTel(String tel) {
 			this.tel = tel;
 		}
+
+		public FindUserEmailBynameAndTelInputDto() {
+			super();
+		}
+
+		public FindUserEmailBynameAndTelInputDto(String name, String tel) {
+			super();
+			this.name = name;
+			this.tel = tel;
+		}
+		
 	}
 
 	public static class FindUserEmailBynameAndTelOutputDto {
@@ -510,6 +574,17 @@ public class MemberDto {
 		public void setName(String name) {
 			this.name = name;
 		}
+
+		public FindUserPasswordByEmailAndNameInputDto() {
+			super();
+		}
+
+		public FindUserPasswordByEmailAndNameInputDto(String email, String name) {
+			super();
+			this.email = email;
+			this.name = name;
+		}
+		
 	}
 
 	public static class FindUserPasswordByEmailAndNameOutputDto {

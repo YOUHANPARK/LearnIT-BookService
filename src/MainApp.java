@@ -11,7 +11,7 @@ public class MainApp {
 	}
 
 	private static void run() {
-		AppConfig ac = new AppConfig();
+		AppConfig ac = AppConfig.getInstance();
 		
 		BookService bs =  ac.getBookService();
 		System.out.println("tlfgod");
@@ -40,7 +40,7 @@ public class MainApp {
 		//System.out.println(bs.ViewLoanHistory(new ViewLoanHistoryInputDto(21)).toArray()[0].toString());
 		
 		/*
-		for(int i=1; i<=5; i++) {
+		for(int i=0; i<=9; i++) {
 			System.out.println(bs.SearchBookByTitle(new SearchBookByTitleInputDto("스마트",1)).toArray()[i].toString());
 		}*/
 	}

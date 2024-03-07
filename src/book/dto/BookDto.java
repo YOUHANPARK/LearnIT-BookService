@@ -138,6 +138,19 @@ public class BookDto {
 			this.category = category;
 		}
 		
+
+        public SearchBookByCategoryInputDto() {
+            super();
+        }
+
+        public SearchBookByCategoryInputDto(String category, int page) {
+            super();
+            this.category = category;
+            this.page = page;
+        }
+        
+        
+		
 	}
 	public static class SearchBookByCategoryOutputDto {
 		long bookseq;
@@ -329,21 +342,21 @@ public class BookDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("SearchBookBySeqOutputDto [bookseq=");
+			builder.append("[bookseq = ");
 			builder.append(bookseq);
-			builder.append(", title=");
+			builder.append(", 책 제목 = ");
 			builder.append(title);
-			builder.append(", callnum=");
+			builder.append(", 청구기호 = ");
 			builder.append(callnum);
-			builder.append(", publisher=");
+			builder.append(", 출판사 = ");
 			builder.append(publisher);
-			builder.append(", author=");
+			builder.append(", 저자 = ");
 			builder.append(author);
-			builder.append(", intro=");
+			builder.append(", 책 소개 = ");
 			builder.append(intro);
-			builder.append(", bookposb=");
+			builder.append(", bookposb = ");
 			builder.append(bookposb);
-			builder.append(", pubyear=");
+			builder.append(", 출판연도 = ");
 			builder.append(pubyear);
 			builder.append("]");
 			return builder.toString();
@@ -796,7 +809,6 @@ public class BookDto {
 		String title;
 		String publisher;
 		String author;
-		Date pubyear;
 		long userseq;
 		
 		public String getTitle() {
@@ -817,18 +829,25 @@ public class BookDto {
 		public void setAuthor(String author) {
 			this.author = author;
 		}
-		public Date getPubyear() {
-			return pubyear;
-		}
-		public void setPubyear(Date pubyear) {
-			this.pubyear = pubyear;
-		}
+		
 		public long getUserseq() {
 			return userseq;
 		}
 		public void setUserseq(long userseq) {
 			this.userseq = userseq;
 		}
+		
+		public RequestBookInputDto() {
+			super();
+		}
+		public RequestBookInputDto(String title, String publisher, String author, long userseq) {
+			super();
+			this.title = title;
+			this.publisher = publisher;
+			this.author = author;
+			this.userseq = userseq;
+		}
+		
 		
 		
 	}

@@ -3,10 +3,17 @@ import java.util.Scanner;
 
 import book.controller.BookController;
 import book.dto.BookDto;
+import book.dto.BookDto.AddFavoriteBookInputDto;
+import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
+import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RequestBookInputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
+import book.dto.BookDto.ViewFavoriteBookInputDto;
+import book.dto.BookDto.ViewLoanHistoryInputDto;
 import member.controller.MemberController;
 import session.Session;
+import session.SessionSet;
 
 
 public class MenuView {
@@ -17,7 +24,8 @@ public class MenuView {
 		while (true) {
 			
 			MenuView.printMenu();
-
+			
+			System.out.print("메뉴 번호를 선택해주세요 : ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -30,7 +38,7 @@ public class MenuView {
 				break;
 
 			case 3:
-				// 회원가입
+				MenuView.register();// 회원가입
 				break;
 
 			case 4:
@@ -43,7 +51,7 @@ public class MenuView {
 	public static void printMenu() {
 		System.out.println(
 				"============================================================================================");					
-		System.out.println("=====================================LeanIT 도서대여서비스=====================================");
+		System.out.println("=====================================LearnIT 도서대여서비스=====================================");
 		System.out.println(
 				"============================================================================================");
 		System.out.println(
@@ -73,6 +81,7 @@ public class MenuView {
 				System.out.println();
 				long bookseq = sc.nextInt();
 				
+				
 				BookDto.SearchBookBySeqInputDto ip = new BookDto.SearchBookBySeqInputDto(bookseq);
 				ip.setBookseq(bookseq);
 				BookController.SearchBookBySeq(ip);
@@ -101,7 +110,11 @@ public class MenuView {
 				System.out.println();
 				String title = sc.nextLine();
 				
-				SearchBookByTitleInputDto ip = new SearchBookByTitleInputDto(title);
+                System.out.println("페이지를 입력해주세요.");
+                System.out.println();
+                int titlepage = sc.nextInt();
+                
+                SearchBookByTitleInputDto ip = new SearchBookByTitleInputDto(title,titlepage);
 				BookController.SearchBookByTitle(ip); // 도서 제목 검색
 				break;
 
@@ -112,7 +125,11 @@ public class MenuView {
 				System.out.println();
 				String category = sc.nextLine();
 				
-				SearchBookByCategoryInputDto input = new SearchBookByCategoryInputDto(category);
+                System.out.println("페이지를 입력해주세요.");
+                System.out.println();
+                int cartpage = sc.nextInt();
+                
+                SearchBookByCategoryInputDto input = new SearchBookByCategoryInputDto(category,cartpage);
 				BookController.SearchBookByCategory(input);
 				break;
 				
@@ -120,6 +137,7 @@ public class MenuView {
 				MenuView.searchBookMenu(); // 뒤로가기
 				break;
 			}
+			
 		}
 	}
 	
@@ -127,30 +145,56 @@ public class MenuView {
 	 * 로그인 메뉴
 	 * */
 	public static void login() {
-		Session ss = new Session();
+		 
 		
-		 System.out.print("아이디 : ");
+         System.out.print("아이디(이메일) : ");
 		 String id = sc.nextLine();
 		 
 		 System.out.print("비밀번호 : ");
 		 int password = sc.nextInt();
 		 
-		 MemberController.login(id, password);
+		 SessionSet ss = SessionSet.getInstance();
+		 Session session = MemberController.login(id, password);
+		 ss.add(session);
+		 
+		 MenuView.checkManager(session);
 		 
 		 
-		 
+	}
+	
+	/**
+	 * 회원가입 메뉴
+	 */
+	public static void register() {
+		System.out.print("이름 : ");
+		String name = sc.nextLine();
+		
+		System.out.print("전화번호 : ");
+		String tel = sc.nextLine();
+		
+		System.out.print("주소: ");
+		String addr = sc.nextLine();
+		
+		System.out.print("아이디로 사용될 이메일: ");
+		String email = sc.nextLine();
+		
+		System.out.print("비밀번호 : ");
+		String password = sc.nextLine();
+		
+		System.out.print("선호 카테고리 : ");
+		String category = sc.nextLine();
+		
+		MemberController.registermem(name, tel, addr, email, password, category);
 	}
 	/**
 	 * 회원/관리자 여부
 	 * */
-	public static void checkManager() {
-		Session ss = new Session();
-		
-		
-		/*if (ss.isAdmin() == true) {
-			MenuView.printAdminMenu();
+	public static void checkManager(Session session) {
+
+		if (session.getAdmin()==1) {
+			MenuView.printAdminMenu(session);
 		}
-		else MenuView.printUserMenu();*/
+		else MenuView.printUserMenu(session);
 	}
 	
 	
@@ -158,16 +202,16 @@ public class MenuView {
 	/**
 	 * 회원 메뉴
 	 */
-	public static void printUserMenu() {
+	public static void printUserMenu(Session session) {
 		while (true) {
-
+			
 			System.out.println(
 					"==========================================회원 로그인==========================================");
 			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회   |   7. 로그아웃");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				MenuView.checkBookMenu(); // 대여
+				MenuView.checkBookMenu(session); // 대여
 				break;
 
 			case 2:
@@ -177,26 +221,36 @@ public class MenuView {
 				// 연장
 				break;
 			case 4:
-				MenuView.requestBookMenu();// 도서요청
+				MenuView.requestBookMenu(session);// 도서요청
 				break;
 			case 5:
-				MenuView.addFavorBookMenu();// 관심도서
+				MenuView.addFavorBookMenu(session);// 관심도서
 				break;
 
 			case 6:
-				// 회원정보 조회
+				MenuView.userInfoMenu(session);//회원정보 조회(관리)메뉴
 				break;
 				
 			case 7:
+				MenuView.logout(session);//로그아웃
 				break;
 			}
 		}
+	}
+	/**
+	 * 로그 아웃
+	 */
+	public static void logout(Session session) {
+		SessionSet ss = SessionSet.getInstance();
+		ss.remove(session);	
+		
+		MenuView.printMenu();
 	}
 
 	/**
 	 * 대여 관리 메뉴
 	 */
-	public static void checkBookMenu() {
+	public static void checkBookMenu(Session session) {
 		while (true) {
 			System.out.println(
 					"                      " + "1. 도서대여   |   2. 도서대여 내역조회   |  3. 뒤로 가기" + "                   ");
@@ -204,24 +258,38 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				// 도서 대여
+				MenuView.loanBook(session);// 도서 대여
 				break;
 
 			case 2:
-				// 도서대여내역 조회
+				MenuView.viewloan(session);// 도서대여내역 조회
 				break;
 				
 			case 3:
-				// 뒤로가기
+				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}
 		}
+	}
+	/**
+	 * 도서 대여
+	 */
+	public static void loanBook(Session session) {
+		System.out.println("책 번호를 입력하세요: ");
+		long bookseq = sc.nextLong();
+		bookController.loanBook(new CheckBookAvailabilityBySeqInputDto(session.getUser_seq(),bookseq));
+	}
+	/**
+	 * 도서 대여 내역 조회
+	 */
+	public static void viewloan(Session session) {
+		bookController.viewLoanHistory(new ViewLoanHistoryInputDto(session.getUser_seq()));
 	}
 	
 	/**
 	 * 도서요청 관리 메뉴
 	 */
-	public static void requestBookMenu() {
+	public static void requestBookMenu(Session session) {
 		while (true) {
 			System.out.println(
 					"                      " + "1. 도서요청   |   2. 도서요청 내역확인   |  3. 뒤로 가기" + "                   ");
@@ -229,24 +297,43 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				// 도서 요청
+				MenuView.requestBook(session.getUser_seq());//도서 요청
 				break;
 
 			case 2:
-				// 도서요청 내역확인
+				MenuView.viewrequestbook(session.getUser_seq());// 도서요청 내역확인
 				break;
 				
 			case 3:
-				// 뒤로가기
+				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}
 		}
+	}
+	/**
+	 * 도서 요청
+	 */
+	public static void requestBook(long userseq) {
+		System.out.print("책 제목을 입력해주세요: ");
+		String title = sc.nextLine();
+		System.out.print("출판사를 입력해주세요: ");
+		String publisher = sc.nextLine();
+		System.out.print("저자를 입력해주세요: ");
+		String author = sc.nextLine();
+		RequestBookInputDto ip = new RequestBookInputDto(title,publisher,author,userseq);
+		BookController.RequestBook(ip);
+	}
+	/**
+	 * 도서 요청 내역 확인
+	 */
+	public static void viewrequestbook(long userseq) {
+		
 	}
 	
 	/**
 	 * 관심도서 관리 메뉴
 	 */
-	public static void addFavorBookMenu() {
+	public static void addFavorBookMenu(Session session) {
 		while (true) {
 			System.out.println(
 					"     " + "1. 관심도서 추가   |   2. 관심도서 리스트 조희   |  3. 관심도서 삭제   |   4. 뒤로 가기" + "     ");
@@ -254,20 +341,19 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				
-				MenuView.insertFavorBook();// 관심도서 추가
+				MenuView.insertFavorBook(session.getUser_seq());// 관심도서 추가
 				break;
 
 			case 2:
-				// 관심도서 리스트 조회
+				MenuView.viewFavorBook(session.getUser_seq());//관심도서 리스트 조회
 				break;
 			
 			case 3:
-				// 관심도서 삭제
+				MenuView.delFavorBook(session.getUser_seq());//관심도서 삭제
 				break;
 				
 			case 4:
-				// 뒤로가기
+				MenuView.printUserMenu(session);
 				break;
 			}
 		}
@@ -277,54 +363,112 @@ public class MenuView {
 	/**
 	 *  관심도서 추가
 	 */
-	public static void insertFavorBook(){
-		System.out.print("아이디 : ");
-		 String id = sc.nextLine();
+	public static void insertFavorBook(long userseq) {
 		 
-		 System.out.print("책 번호를 입력해주세요.");
-		 String password = sc.nextLine();
+		System.out.print("책 번호를 입력해주세요.");
+		long bookseq = sc.nextLong();
         
-		
+		BookController.AddFavoriteBook(new AddFavoriteBookInputDto(userseq,bookseq));
 
 	}
-	
+	/**
+	 * 관심도서 조회
+	 */
+	public static void viewFavorBook(long userseq) {
+		BookController.ViewFavoriteBook(new ViewFavoriteBookInputDto(userseq));
+	}
+	/**
+	 * 관심도서 삭제
+	 */
+	public static void delFavorBook(long userseq) {
+		System.out.print("책 제목을 입력해주세요.:");
+		String booktitle = sc.nextLine();
+		BookController.DeleteFavoriteBook(new DeleteFavoriteBookInputDto(booktitle,userseq));
+	}
 	
 	/**
 	 * 회원정보 조회(회원) 관리 메뉴
 	 */
-	public static void userInfoMenu() {
+	public static void userInfoMenu(Session session) {
 		while (true) {
 			System.out.println(" " + "1. 회원정보 조회   |   2. 회원정보 수정   |  3. ID 찾기   |   4. PASSWORD 찾기   |   5. 뒤로 가기");
 
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				// 회원정보 조회
+				MemberController.viewmeminfo(session.getUser_seq());// 회원정보 조회
 				break;
 
 			case 2:
-				// 회원정보 수정
+				MenuView.updatememinfo(session);// 회원정보 수정
 				break;
 			
 			case 3:
-				// ID 찾기
+				MenuView.findEmail();// ID 찾기
 				break;
 			
 			case 4:
-				//비밀번호 찾기
+				MenuView.findPassword();//비밀번호 찾기
 				break;
 				
 			case 5:
-				// 뒤로가기
+				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}
 		}
+	}
+	/**
+	 * 회원정보 수정
+	 */
+	public static void updatememinfo(Session session) {
+		System.out.print("이름 : ");
+		String name = sc.nextLine();
+		
+		System.out.print("전화번호 : ");
+		String tel = sc.nextLine();
+		
+		System.out.print("주소: ");
+		String addr = sc.nextLine();
+		
+		System.out.print("아이디로 사용될 이메일: ");
+		String email = sc.nextLine();
+		
+		System.out.print("비밀번호 : ");
+		String password = sc.nextLine();
+		
+		System.out.print("선호 카테고리 : ");
+		String category = sc.nextLine();
+		
+		MemberController.updatememinfo(name,tel,addr,email,password,category,session.getUser_seq());
+	}
+	
+	/**
+	 * ID찾기
+	 */
+	public static void findEmail() {
+		System.out.print("이름: ");
+		String name = sc.nextLine();
+		System.out.print("전화번호: ");
+		String tel = sc.nextLine();
+		
+		MemberController.findUserEmail(name,tel);
+	}
+	/**
+	 * 비밀번호 찾기
+	 */
+	public static void findPassword() {
+		System.out.println("이메일: ");
+		String email = sc.nextLine();
+		System.out.println("이름: ");
+		String name = sc.nextLine();
+		MemberController.findPassword(email, name);
+		
 	}
 	
 	/**
 	 * 관리자 메뉴
 	 */
-	public static void printAdminMenu() {
+	public static void printAdminMenu(Session session) {
 		while (true) {
 			System.out	  
 			.println("==========================================관리자 로그인==========================================");
@@ -332,7 +476,7 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				MenuView.checkBookMenu(); // 대여
+				 // 대여
 				break;
 
 			case 2:
@@ -342,10 +486,10 @@ public class MenuView {
 				// 연장
 				break;
 			case 4:
-				MenuView.registerBookMenu();// 도서관리
+				// 도서관리
 				break;
 			case 5:
-				MenuView.addFavorBookMenu(); // 관심도서
+				// 관심도서
 				break;
 
 			case 6:
