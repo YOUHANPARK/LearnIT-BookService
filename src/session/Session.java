@@ -2,19 +2,16 @@ package session;
 
 
 public class Session {
-	LoginMemberOutputDto loginMember = new 
 	
 	private long user_seq;
-	private long bookseq;
-	private boolean isAdmin;
+	private int Admin;
 	
 	public Session() {}
 
-	public Session(long user_seq, long bookseq, boolean isAdmin) {
+	public Session(long user_seq, int Admin) {
 		super();
 		this.user_seq = user_seq;
-		this.bookseq = bookseq;
-		this.isAdmin = isAdmin;
+		this.Admin = Admin;
 	}
 
 	public long getUser_seq() {
@@ -25,19 +22,11 @@ public class Session {
 		this.user_seq = user_seq;
 	}
 
-	public long getBookseq() {
-		return bookseq;
+	public int getAdmin() {
+		return Admin;
 	}
 
-	public void setBookseq(long bookseq) {
-		this.bookseq = bookseq;
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(int Admin) {
+		this.Admin = Admin;
 	}
 }
