@@ -10,7 +10,7 @@ public class BookDto {
 	public static class SearchBookByTitleInputDto{
 		String title;
 		int page;
-
+		
 		public String getTitle() {
 			return title;
 		}
@@ -480,7 +480,9 @@ public class BookDto {
 		
 	}
 	
-	
+	/**
+	 * 도서 대여 Input
+	 */
 	public static class CheckBookAvailabilityBySeqInputDto{
 		long bookseq;
 		long userseq;
@@ -507,9 +509,13 @@ public class BookDto {
 		
 		
 	}
+	/**
+	 * 도서 대여 Output
+	 */
 	public static class CheckBookAvailabilityBySeqOutputDto{
 		Date returndate;
 		int bookposbnum;
+		
 		public Date getReturndate() {
 			return returndate;
 		}
@@ -941,13 +947,67 @@ public class BookDto {
 		
 	}
 	
+	/**
+	 * 반납 Input
+	 */
 	public static class ReturnBookBySeqInputDto{
 		long bookseq;
 		long userseq;
+		public ReturnBookBySeqInputDto() {
+			super();
+			
+		}
+		public ReturnBookBySeqInputDto(long bookseq, long userseq) {
+			super();
+			this.bookseq = bookseq;
+			this.userseq = userseq;
+		}
+		public long getBookseq() {
+			return bookseq;
+		}
+		public void setBookseq(long bookseq) {
+			this.bookseq = bookseq;
+		}
+		public long getUserseq() {
+			return userseq;
+		}
+		public void setUserseq(long userseq) {
+			this.userseq = userseq;
+		}
+		
+		
 	}
+	
+	/**
+	 * 반납 Output
+	 */
 	public static class ReturnBookBySeqOutputDto{
 		Date rentdate;
 		Date returndate;
+		
+		
+		public ReturnBookBySeqOutputDto() {
+			super();
+		}
+		
+		public ReturnBookBySeqOutputDto(Date rentdate, Date returndate) {
+			super();
+			this.rentdate = rentdate;
+			this.returndate = returndate;
+		}
+		public Date getRentdate() {
+			return rentdate;
+		}
+		public void setRentdate(Date rentdate) {
+			this.rentdate = rentdate;
+		}
+		public Date getReturndate() {
+			return returndate;
+		}
+		public void setReturndate(Date returndate) {
+			this.returndate = returndate;
+		}
+			
 	}
 	
 	public static class ExtendBookLoanBySeqInputDto{
@@ -1155,5 +1215,7 @@ public class BookDto {
 		}
 		
 	}
+	
+	
 }
 

@@ -16,6 +16,8 @@ import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.RegisterBookRequestedInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
+import book.dto.BookDto.ReturnBookBySeqInputDto;
+import book.dto.BookDto.ReturnBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookBySeqInputDto;
 import book.dto.BookDto.SearchBookBySeqOutputDto;
@@ -75,6 +77,8 @@ public interface BookDAO {
 	void delFBook(DeleteFavoriteBookInputDto delbook);
 	
 	CheckBookAvailabilityBySeqOutputDto checkBook(CheckBookAvailabilityBySeqInputDto checkbook);
+	
+	ReturnBookBySeqOutputDto ReturnBook(ReturnBookBySeqInputDto returnbook);
 	
 	void registerUnreqBook(RegisterBookUnrequestedInputDto registerbook);
 	void registerReqBook(RegisterBookRequestedInputDto registerbook);

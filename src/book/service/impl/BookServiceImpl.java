@@ -39,6 +39,12 @@ import book.dto.BookDto.ViewLoanHistoryOutputDto;
 import book.service.BookService;
 
 public class BookServiceImpl implements BookService{
+	
+	
+
+	public BookServiceImpl() {
+		this.bookDAO = null;	
+	}
 
 	private final BookDAO bookDAO;
 	
@@ -90,7 +96,10 @@ public class BookServiceImpl implements BookService{
 		bookDAO.delFBook(ip);
 		
 	}
-
+	
+	/**
+	 * 도서 대여
+	 */
 	@Override
 	public CheckBookAvailabilityBySeqOutputDto CheckBookAvailabilityBySeq(CheckBookAvailabilityBySeqInputDto ip) {
 		CheckBookAvailabilityBySeqOutputDto result = new CheckBookAvailabilityBySeqOutputDto();
