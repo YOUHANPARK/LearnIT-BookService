@@ -21,7 +21,7 @@ public class AppConfig {
 	private final BookDAO bookDAO;
 
 	private final MemberService memberService;
-	private final MemberDAO memberDAO;;
+	private final MemberDAO memberDAO;
 
 	public AppConfig() {
 		bookDAO = new BookDAOImpl();
