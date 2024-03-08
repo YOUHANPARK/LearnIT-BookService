@@ -110,8 +110,11 @@ public class MenuView {
 	public static void searchBookBylistMenu() {
 		while (true) {
 			System.out.println(
-					"                      " + "1. 제목 검색   |   2. 카테고리 검색   |  3. 뒤로 가기" + "                   ");
-
+					"                              " + "1. 제목 검색   |   2. 뒤로 가기" + "                           "); // 카테고리 검색 제외
+			
+			/*System.out.println(
+					"                      " + "1. 제목 검색   |   2. 카테고리 검색   |  3. 뒤로 가기" + "                   ");*/
+			
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -128,7 +131,7 @@ public class MenuView {
 				BookController.SearchBookByTitle(ip); // 도서 제목 검색
 				break;
 
-			case 2:
+			/*case 2:
 				// 도서 카테고리 검색
 				
 				System.out.println("카테고리를 입력해주세요.");
@@ -144,6 +147,10 @@ public class MenuView {
 				break;
 				
 			case 3:
+				MenuView.searchBookMenu(); // 뒤로가기
+				break;*/ // 카테고리 검색 제외
+				
+			case 2:
 				MenuView.searchBookMenu(); // 뒤로가기
 				break;
 			}
@@ -220,7 +227,9 @@ public class MenuView {
 			
 			System.out.println(
 					"==========================================회원 로그인==========================================");
-			System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회   |   7. 로그아웃");
+			System.out.println("                   1. 대여   |   2. 반납   |  3. 회원정보 조회   |   4. 로그아웃");
+			//System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회   |   7. 로그아웃");
+			
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -230,7 +239,7 @@ public class MenuView {
 			case 2:
 				MenuView.returnBook(session);// 반납
 				break;
-			case 3:
+			/*case 3:
 				// 연장
 				break;
 			case 4:
@@ -245,6 +254,15 @@ public class MenuView {
 				break;
 				
 			case 7:
+				MenuView.logout(session);//로그아웃
+				MenuView.menu();
+				break;*/
+				
+			case 3:
+				MenuView.userInfoMenu(session);//회원정보 조회(관리)메뉴
+				break;
+				
+			case 4:
 				MenuView.logout(session);//로그아웃
 				MenuView.menu();
 				break;
@@ -274,7 +292,7 @@ public class MenuView {
 		SessionSet ss = SessionSet.getInstance();
 		ss.remove(session);	
 		
-		MenuView.printMenu();
+		//MenuView.printMenu();
 	}
 
 	/**
