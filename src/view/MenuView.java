@@ -9,6 +9,7 @@ import book.dto.BookDto;
 import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RateBookInputDto;
 import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
@@ -260,6 +261,10 @@ public class MenuView {
 		System.out.print("반납할 책 번호: ");
 		long bookseq = sc.nextLong();
 		BookController.returnBook(new ReturnBookBySeqInputDto(bookseq,session.getUser_seq()));
+		sc.nextLine();
+		System.out.print("별점을 남겨주세요: ");
+		int rate = Integer.parseInt(sc.nextLine());
+		BookController.rateBook(new RateBookInputDto(rate,bookseq,session.getUser_seq()));
 	}
 	/**
 	 * 도서 추천

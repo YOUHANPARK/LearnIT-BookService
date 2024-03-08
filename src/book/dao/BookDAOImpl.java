@@ -583,28 +583,52 @@ public class BookDAOImpl implements BookDAO{
 	public ReturnBookBySeqOutputDto returnBook(ReturnBookBySeqInputDto returnbook) {
 		Connection con = null;
 		PreparedStatement psUpdate = null;
+		
+		PreparedStatement newps = null;
+		ResultSet newrs = null;
+		long borrowseq = 0;
+		
 		PreparedStatement psReturnDel = null;
 		PreparedStatement psDelete = null;
 		ResultSet rs = null;
 		ReturnBookBySeqOutputDto returnbookdto = new ReturnBookBySeqOutputDto();
 		String updatesql = "update 책 set loan_possible = loan_possible + 1 where loan_possible = 0 and book_seq = ?";
-		String deletesql = "delete from 대여상세 where book_seq = ? and borrow_seq IN (select borrow_seq from 대여 where user_seq = ?)"; //borrow_seq = ? and 
+		
+		String newsql = "select borrow_seq from 대여 join 대여상세 using(borrow_seq) where book_seq = ? and user_seq = ?";
+		
+		
+		String deletesql = "delete from 대여상세 where book_seq = ? and borrow_seq = ?";
+		//String deletesql = "delete from 대여상세 where book_seq = ? and borrow_seq = (select borrow_seq from 대여 where user_seq = ?)"; //borrow_seq = ? and 
 								//delete from 대여 b1 where user_seq = ? and borrow_seq = (select borrow_seq from 대여상세 b2 where b1.borrow_seq = b2.borrow_seq)
-		String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq IN (select borrow_seq from 대여상세 where book_seq = ?)";					
+		//String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq = (select borrow_seq from 대여상세 where book_seq = ?)";					
+		String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq = ?";					
+		
+		
 		try {
 			con = DBUtil.getConnection();
 			psUpdate = con.prepareStatement(updatesql);
 			psUpdate.setLong(1, returnbook.getBookseq());
 			psUpdate.executeUpdate();
 			
+			newps = con.prepareStatement(newsql);
+			newps.setLong(1, returnbook.getBookseq());
+			newps.setLong(2, returnbook.getUserseq());
+			newrs = newps.executeQuery();
+			while(newrs.next()) {
+				borrowseq = newrs.getLong(1);
+			}
+			
+			
 			psDelete = con.prepareStatement(deletesql);
 			psDelete.setLong(1, returnbook.getBookseq());
-			psDelete.setLong(2, returnbook.getUserseq());
+			//psDelete.setLong(2, returnbook.getUserseq());
+			psDelete.setLong(2, borrowseq);
 			psDelete.executeQuery();
 			
 			psReturnDel = con.prepareStatement(returnDelSql);
 			psReturnDel.setLong(1, returnbook.getUserseq());
-			psReturnDel.setLong(2, returnbook.getBookseq());
+			//psReturnDel.setLong(2, returnbook.getBookseq());
+			psReturnDel.setLong(2, borrowseq);
 			
 			rs = psReturnDel.executeQuery();
 			

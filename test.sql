@@ -39,3 +39,8 @@ WHERE rnum >=1 and rnum<=10 ;
 
 insert into 도서추가요청 (request_date, request_status, addbook_title, addbook_author,publisher, user_seq) 
 values ((select sysdate from dual),'처리 중','test','test','test','85');
+
+select borrow_seq, user_seq, book_seq
+from 대여 join 대여상세
+using(borrow_seq)
+where book_seq = ? and user_seq = ?;

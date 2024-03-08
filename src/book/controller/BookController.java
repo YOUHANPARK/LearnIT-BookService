@@ -6,6 +6,7 @@ import book.dto.BookDto.AddFavoriteBookInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqInputDto;
 import book.dto.BookDto.CheckBookAvailabilityBySeqOutputDto;
 import book.dto.BookDto.DeleteFavoriteBookInputDto;
+import book.dto.BookDto.RateBookInputDto;
 import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
@@ -132,6 +133,13 @@ public class BookController {
 		ReturnBookBySeqOutputDto op = bookService.ReturnBookBySeq(ip);
 		System.out.println("대여 날짜: "+op.getRentdate());
 		System.out.println("반납 날짜: "+op.getReturndate());
+	}
+	/**
+	 * 별점 남기기
+	 */
+	public static void rateBook(RateBookInputDto ip) {
+		bookService.RateBook(ip);
+		EndView.printMessage("별점이 등록되었습니다.");
 	}
 	
 }
