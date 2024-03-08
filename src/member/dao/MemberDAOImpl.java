@@ -225,7 +225,7 @@ public class MemberDAOImpl implements MemberDAO {
 				member.setUserSeq(rs.getLong("USER_SEQ"));
 				member.setName(rs.getString("NAME"));
 				member.setAdmin(rs.getInt("IS_ADMIN"));
-				System.out.println(member);
+				
 				return member;
 			}
 		} catch (SQLException e) {
