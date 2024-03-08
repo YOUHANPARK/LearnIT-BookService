@@ -590,6 +590,7 @@ public class BookDAOImpl implements BookDAO{
 		
 		PreparedStatement psReturnDel = null;
 		PreparedStatement psDelete = null;
+		PreparedStatement psPrint = null;
 		ResultSet rs = null;
 		ReturnBookBySeqOutputDto returnbookdto = new ReturnBookBySeqOutputDto();
 		String updatesql = "update 책 set loan_possible = loan_possible + 1 where loan_possible = 0 and book_seq = ?";
@@ -603,6 +604,7 @@ public class BookDAOImpl implements BookDAO{
 		//String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq = (select borrow_seq from 대여상세 where book_seq = ?)";					
 		String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq = ?";					
 		
+		String printsql = "select rental_date, expectedreturn_date from 대여 join 대여상세 using(borrow_seq) join 책 using(book_seq) where user_seq=?";
 		
 		try {
 			con = DBUtil.getConnection();
@@ -629,11 +631,15 @@ public class BookDAOImpl implements BookDAO{
 			psReturnDel.setLong(1, returnbook.getUserseq());
 			//psReturnDel.setLong(2, returnbook.getBookseq());
 			psReturnDel.setLong(2, borrowseq);
+			psReturnDel.executeQuery();
 			
-			rs = psReturnDel.executeQuery();
+			psPrint = con.prepareStatement(printsql);
+			psPrint.setLong(1, returnbook.getUserseq());
+			rs = psPrint.executeQuery();
 			
 			if(rs.next()) {
-				returnbookdto = new ReturnBookBySeqOutputDto();
+				
+				returnbookdto = new ReturnBookBySeqOutputDto(rs.getDate(1), rs.getDate(2));
 			}
 			
 		}catch(Exception e) {

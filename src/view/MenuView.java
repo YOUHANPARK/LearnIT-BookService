@@ -228,7 +228,7 @@ public class MenuView {
 			
 			System.out.println(
 					"==========================================회원 로그인==========================================");
-			System.out.println("                   1. 대여   |   2. 반납   |  3. 회원정보 조회   |   4. 로그아웃");
+			System.out.println("              1. 대여   |   2. 반납   |  3. 관심도서   |  4. 회원정보 조회   |   5. 로그아웃");
 			//System.out.println("1. 대여   |   2. 반납   |  3. 연장   |   4. 도서요청   |   5. 관심도서   |   6. 회원정보 조회   |   7. 로그아웃");
 			
 			int menu = Integer.parseInt(sc.nextLine());
@@ -258,12 +258,16 @@ public class MenuView {
 				MenuView.logout(session);//로그아웃
 				MenuView.menu();
 				break;*/
-				
+			
 			case 3:
+				MenuView.addFavorBookMenu(session);// 관심도서
+				break;	
+				
+			case 4:
 				MenuView.userInfoMenu(session);//회원정보 조회(관리)메뉴
 				break;
 				
-			case 4:
+			case 5:
 				MenuView.logout(session);//로그아웃
 				MenuView.menu();
 				break;
