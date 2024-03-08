@@ -484,17 +484,26 @@ public class BookDto {
 	 * 관심도서 삭제
 	 */
 	public static class DeleteFavoriteBookInputDto{
-		String title;
+//		String title;
+		long bookseq;
 		long userseq;
 		
-		public String getTitle() {
-			return title;
-		}
-		public void setTitle(String title) {
-			this.title = title;
-		}
+//		public String getTitle() {
+//			return title;
+//		}
+//		public void setTitle(String title) {
+//			this.title = title;
+//		}
+		
+		
 		public long getUserseq() {
 			return userseq;
+		}
+		public long getBookseq() {
+			return bookseq;
+		}
+		public void setBookseq(long bookseq) {
+			this.bookseq = bookseq;
 		}
 		public void setUserseq(long userseq) {
 			this.userseq = userseq;
@@ -503,11 +512,17 @@ public class BookDto {
 		public DeleteFavoriteBookInputDto() {
 			super();
 		}
-		public DeleteFavoriteBookInputDto(String title, long userseq) {
+//		public DeleteFavoriteBookInputDto(String title, long userseq) {
+//			super();
+//			this.title = title;
+//			this.userseq = userseq;
+//		}
+		public DeleteFavoriteBookInputDto(long bookseq, long userseq) {
 			super();
-			this.title = title;
+			this.bookseq = bookseq;
 			this.userseq = userseq;
 		}
+		
 		
 		
 	}

@@ -14,7 +14,6 @@ import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
 import book.dto.BookDto.ReturnBookBySeqInputDto;
-import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.dto.BookDto.ViewFavoriteBookInputDto;
 import book.dto.BookDto.ViewLoanHistoryInputDto;
@@ -446,9 +445,9 @@ public class MenuView {
 	 * 관심도서 삭제
 	 */
 	public static void delFavorBook(long userseq) {
-		System.out.print("책 제목을 입력해주세요.:");
-		String booktitle = sc.nextLine();
-		BookController.DeleteFavoriteBook(new DeleteFavoriteBookInputDto(booktitle,userseq));
+		System.out.print("책 번호를 입력해주세요.:");
+		long bookseq = sc.nextLong();
+		BookController.DeleteFavoriteBook(new DeleteFavoriteBookInputDto(bookseq,userseq));
 	}
 	
 	/**

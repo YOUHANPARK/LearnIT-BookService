@@ -43,3 +43,15 @@ values ((select sysdate from dual),'처리 중','test','test','test','85');
 select *
 from 대여 join 대여상세
 using(borrow_seq);
+
+
+select *
+from 책
+where book_seq = 122318967;
+
+select * 
+from 책
+where book_title = '핵심만 골라 배우는 SwiftUI 기반의 iOS 프로그래밍';
+
+delete from 관심도서 
+where book_seq = (select book_seq from 책 where book_title = '핵심만 골라 배우는 SwiftUI 기반의 iOS 프로그래밍') and user_seq ='84';

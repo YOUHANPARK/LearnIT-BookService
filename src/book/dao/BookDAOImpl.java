@@ -207,12 +207,14 @@ public class BookDAOImpl implements BookDAO{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "delete from 관심도서 where book_seq = (select book_seq from 책 where book_title = ?) and user_seq =?";
+		//String sql = "delete from 관심도서 where book_seq = (select book_seq from 책 where book_title = ?) and user_seq =?";
+		String sql = "delete from 관심도서 where book_seq = ? and user_seq =?";
 		
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, delbook.getTitle());
+			//ps.setString(1, delbook.getTitle());
+			ps.setLong(1, delbook.getBookseq());
 			ps.setLong(2, delbook.getUserseq());
 			rs = ps.executeQuery();
 			
