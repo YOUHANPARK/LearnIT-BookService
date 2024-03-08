@@ -1046,6 +1046,19 @@ public class BookDto {
 		public void setReturndate(Date returndate) {
 			this.returndate = returndate;
 		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("[대여 날짜=");
+			builder.append(rentdate);
+			builder.append(", 반납 날짜=");
+			builder.append(returndate);
+			builder.append("]");
+			return builder.toString();
+		}
+		
+		
 			
 	}
 	

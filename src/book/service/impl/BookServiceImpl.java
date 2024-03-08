@@ -114,7 +114,7 @@ public class BookServiceImpl implements BookService{
 	public ReturnBookBySeqOutputDto ReturnBookBySeq(ReturnBookBySeqInputDto ip) {
 		ReturnBookBySeqOutputDto result = new ReturnBookBySeqOutputDto();
 		result = bookDAO.returnBook(ip);
-		return null;
+		return result;
 	}
 	
 	@Override

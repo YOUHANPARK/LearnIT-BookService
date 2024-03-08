@@ -14,7 +14,7 @@ public interface MemberDAO {
 	void updateMemberInfo(UpdateMemberInfoForMemInputDto member);
 
 	// 특정 회원 정보 조회
-	ViewMemberInfoOutputDto viewMemberInfo(long userSeq);
+	ViewMemberInfoOutputDto viewMemberInfo(ViewMemberInfoInputDto ip);
 
 	// 모든 회원 정보 조회 (관리자용)
 	List<ViewAllMembersInfoOutputDto> viewAllMembersInfo();

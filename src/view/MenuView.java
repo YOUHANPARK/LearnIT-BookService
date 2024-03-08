@@ -12,6 +12,7 @@ import book.dto.BookDto.DeleteFavoriteBookInputDto;
 import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
+import book.dto.BookDto.ReturnBookBySeqInputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookByTitleInputDto;
 import book.dto.BookDto.ViewFavoriteBookInputDto;
@@ -227,7 +228,7 @@ public class MenuView {
 				break;
 
 			case 2:
-				// 반납
+				MenuView.returnBook(session);// 반납
 				break;
 			case 3:
 				// 연장
@@ -245,11 +246,20 @@ public class MenuView {
 				
 			case 7:
 				MenuView.logout(session);//로그아웃
-				return;
+				MenuView.menu();
+				break;
 			}
 			sc.nextLine();
 		}
 		
+	}
+	/**
+	 * 도서 반납
+	 */
+	public static void returnBook(Session session) {
+		System.out.print("반납할 책 번호: ");
+		long bookseq = sc.nextLong();
+		BookController.returnBook(new ReturnBookBySeqInputDto(bookseq,session.getUser_seq()));
 	}
 	/**
 	 * 도서 추천

@@ -10,6 +10,8 @@ import book.dto.BookDto.RecommendBookInputDto;
 import book.dto.BookDto.RecommendBookOutputDto;
 import book.dto.BookDto.RegisterBookUnrequestedInputDto;
 import book.dto.BookDto.RequestBookInputDto;
+import book.dto.BookDto.ReturnBookBySeqInputDto;
+import book.dto.BookDto.ReturnBookBySeqOutputDto;
 import book.dto.BookDto.SearchBookByCategoryInputDto;
 import book.dto.BookDto.SearchBookByCategoryOutputDto;
 import book.dto.BookDto.SearchBookBySeqInputDto;
@@ -123,4 +125,13 @@ public class BookController {
 		List<RecommendBookOutputDto> list = bookService.RecommendBook(ip);
 		EndView.printRecommend(list);
 	}
+	/**
+	 * 도서 반납
+	 */
+	public static void returnBook(ReturnBookBySeqInputDto ip) {
+		ReturnBookBySeqOutputDto op = bookService.ReturnBookBySeq(ip);
+		System.out.println("대여 날짜: "+op.getRentdate());
+		System.out.println("반납 날짜: "+op.getReturndate());
+	}
+	
 }

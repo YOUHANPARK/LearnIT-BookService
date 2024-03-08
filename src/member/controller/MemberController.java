@@ -55,6 +55,7 @@ public class MemberController {
 	 */
 	public static void viewmeminfo(long userseq) {
 		ViewMemberInfoOutputDto op = memberService.viewMemberInfoForMem(new ViewMemberInfoInputDto(userseq));
+		System.out.println("회원님의 정보는 다음과 같습니다.");
 		System.out.println(op);
 	}
 	

@@ -265,17 +265,17 @@ public class MemberDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("ViewMemberInfoOutputDto [name=");
+			builder.append("[이름=");
 			builder.append(name);
-			builder.append(", tel=");
+			builder.append(", 전화번호=");
 			builder.append(tel);
-			builder.append(", addr=");
+			builder.append(", 주소=");
 			builder.append(addr);
-			builder.append(", email=");
+			builder.append(", 이메일=");
 			builder.append(email);
-			builder.append(", password=");
+			builder.append(", 비밀번호=");
 			builder.append(password);
-			builder.append(", category=");
+			builder.append(", 선호 카테고리=");
 			builder.append(category);
 			builder.append("]");
 			return builder.toString();

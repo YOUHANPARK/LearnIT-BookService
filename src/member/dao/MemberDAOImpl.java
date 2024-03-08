@@ -18,6 +18,7 @@ import member.dto.MemberDto.RestrictBookLoanInputDto;
 import member.dto.MemberDto.UpdateMemberInfoForMemInputDto;
 import member.dto.MemberDto.ViewAllMembersInfoInputDto;
 import member.dto.MemberDto.ViewAllMembersInfoOutputDto;
+import member.dto.MemberDto.ViewMemberInfoInputDto;
 import member.dto.MemberDto.ViewMemberInfoOutputDto;
 import member.dto.MemberDto.ViewOverdueMembersInputDto;
 import member.dto.MemberDto.ViewOverdueMembersOutputDto;
@@ -121,11 +122,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// 특정 회원 정보 조회
 	@Override
-	public ViewMemberInfoOutputDto viewMemberInfo(long userSeq) {
+	public ViewMemberInfoOutputDto viewMemberInfo(ViewMemberInfoInputDto ip) {
 		String sql = "SELECT NAME, TEL, ADDR, EMAIL, PASSWORD, CATEGORY FROM 회원 WHERE USER_SEQ = ?";
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			pstmt.setLong(1, userSeq);
+			pstmt.setLong(1, ip.getUserSeq());
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					ViewMemberInfoOutputDto memberInfo = new ViewMemberInfoOutputDto();

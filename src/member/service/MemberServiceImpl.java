@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원정보조회
 	public ViewMemberInfoOutputDto viewMemberInfoForMem(ViewMemberInfoInputDto viewmember) {
-		return null;
+		return MemberDAO.viewMemberInfo(viewmember);
 	};
 
 	// 모든회원정보조회
