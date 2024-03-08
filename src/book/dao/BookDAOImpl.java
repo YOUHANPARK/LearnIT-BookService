@@ -587,7 +587,8 @@ public class BookDAOImpl implements BookDAO{
 		PreparedStatement newps = null;
 		ResultSet newrs = null;
 		long borrowseq = 0;
-		
+		Date rentalDate = null;
+		Date returnDate = null;
 		PreparedStatement psReturnDel = null;
 		PreparedStatement psDelete = null;
 		PreparedStatement psPrint = null;
@@ -595,7 +596,7 @@ public class BookDAOImpl implements BookDAO{
 		ReturnBookBySeqOutputDto returnbookdto = new ReturnBookBySeqOutputDto();
 		String updatesql = "update 책 set loan_possible = loan_possible + 1 where loan_possible = 0 and book_seq = ?";
 		
-		String newsql = "select borrow_seq from 대여 join 대여상세 using(borrow_seq) where book_seq = ? and user_seq = ?";
+		String newsql = "select borrow_seq , rental_date, expectedreturn_date from 대여 join 대여상세 using(borrow_seq) where book_seq = ? and user_seq = ?";
 		
 		
 		String deletesql = "delete from 대여상세 where book_seq = ? and borrow_seq = ?";
@@ -604,7 +605,7 @@ public class BookDAOImpl implements BookDAO{
 		//String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq = (select borrow_seq from 대여상세 where book_seq = ?)";					
 		String returnDelSql = "delete from 대여 where user_seq = ? and borrow_seq = ?";					
 		
-		String printsql = "select rental_date, expectedreturn_date from 대여 join 대여상세 using(borrow_seq) join 책 using(book_seq) where user_seq=?";
+		//String printsql = "select rental_date, expectedreturn_date from 대여 join 대여상세 using(borrow_seq) join 책 using(book_seq) where user_seq=?";
 		
 		try {
 			con = DBUtil.getConnection();
@@ -618,6 +619,9 @@ public class BookDAOImpl implements BookDAO{
 			newrs = newps.executeQuery();
 			while(newrs.next()) {
 				borrowseq = newrs.getLong(1);
+				rentalDate = newrs.getDate(2);
+				returnDate = newrs.getDate(3);
+				returnbookdto = new ReturnBookBySeqOutputDto(rentalDate, returnDate);
 			}
 			
 			
@@ -633,14 +637,13 @@ public class BookDAOImpl implements BookDAO{
 			psReturnDel.setLong(2, borrowseq);
 			psReturnDel.executeQuery();
 			
-			psPrint = con.prepareStatement(printsql);
+			/*psPrint = con.prepareStatement(printsql);
 			psPrint.setLong(1, returnbook.getUserseq());
-			rs = psPrint.executeQuery();
+			rs = psPrint.executeQuery();*/
 			
-			if(rs.next()) {
+			//if(newrs.next()) {
 				
-				returnbookdto = new ReturnBookBySeqOutputDto(rs.getDate(1), rs.getDate(2));
-			}
+			//}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
