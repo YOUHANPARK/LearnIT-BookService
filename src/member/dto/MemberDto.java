@@ -40,7 +40,8 @@ public class MemberDto {
 		public String getCategory() {
 			return category;
 		}
-
+		
+	
 		// Setters
 
 		public void setName(String name) {
@@ -260,6 +261,27 @@ public class MemberDto {
 		public void setCategory(String category) {
 			this.category = category;
 		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("ViewMemberInfoOutputDto [name=");
+			builder.append(name);
+			builder.append(", tel=");
+			builder.append(tel);
+			builder.append(", addr=");
+			builder.append(addr);
+			builder.append(", email=");
+			builder.append(email);
+			builder.append(", password=");
+			builder.append(password);
+			builder.append(", category=");
+			builder.append(category);
+			builder.append("]");
+			return builder.toString();
+		}
+		
+		
 
 	}
 
@@ -484,12 +506,8 @@ public class MemberDto {
 
 	public static class LoginMemberOutputDto {
 		private long userSeq;
-//<<<<<<< HEAD
 		private int isAdmin;
-//=======
 		private String name;
-		
-//>>>>>>> 95586a2b9e4bc747e9d5b51c586d7ece2aca0efd
 
 		// Getters
 		public long getUserSeq() {

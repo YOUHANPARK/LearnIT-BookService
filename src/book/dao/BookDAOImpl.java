@@ -407,7 +407,7 @@ public class BookDAOImpl implements BookDAO{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ManageBookRequestOutputDto op = null;
+		ManageBookRequestOutputDto op=null;
 		String sql = "update 도서추가요청 set request_status='처리완료' where addbook_title=? and publisher=? and addbook_author=? and user_seq=?";
 		try {
 			con = DBUtil.getConnection();
@@ -485,29 +485,32 @@ public class BookDAOImpl implements BookDAO{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<RecommendBookOutputDto> recommendlist = new ArrayList<>();
-		String sql = "SELECT AVG(별점.score) , 책.book_title, 책.name\r\n"
-				+ "FROM 별점 , 책\r\n"
-				+ "WHERE 별점.book_seq = 책.book_seq AND 책.name = (SELECT 회원.category FROM 회원 WHERE 회원.user_seq = ? )\r\n"
-				+ "GROUP BY 별점.book_seq , 책.book_title , 책.name\r\n"
+		String sql = "SELECT AVG(별점.score) AS average_score, 책.book_title, 책.call_number, 책.publisher, 책.author, 책.publication_year, 책.loan_possible\r\n"
+				+ "FROM 별점, 책\r\n"
+				+ "WHERE 별점.book_seq = 책.book_seq AND 책.name = (SELECT 회원.category FROM 회원 WHERE 회원.user_seq = ?)\r\n"
+				+ "GROUP BY 책.book_seq, 책.book_title, 책.call_number, 책.publisher, 책.author, 책.publication_year, 책.loan_possible, 책.name\r\n"
 				+ "ORDER BY AVG(별점.score) DESC\r\n"
-				+ "FETCH FIRST 5 ROWS ONLY ;";
+				+ "FETCH FIRST 5 ROWS ONLY";
 		
 		try {
 			con = DBUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setLong(1, recommendbook.getUserseq());
+			ps.setLong(1, recommendbook.getUserseq());	//sql문에 첫 번째 ? 안에 값을 넣어준다.
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				RecommendBookOutputDto op = new RecommendBookOutputDto(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getInt(6));
+				RecommendBookOutputDto op = new RecommendBookOutputDto(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDate(6),rs.getInt(7));
 				recommendlist.add(op);
+				
 			}
+			return recommendlist;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBUtil.DbClose(con, ps, rs);
 		}
-		return recommendlist;
+		return null;
+		
 	}
 	
 	/**

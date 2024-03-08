@@ -3,6 +3,7 @@ package member.controller;
 import book.service.BookService;
 //<<<<<<< HEAD
 import config.AppConfig;
+//=======
 import member.dto.MemberDto.FindUserEmailBynameAndTelInputDto;
 import member.dto.MemberDto.FindUserPasswordByEmailAndNameInputDto;
 import member.dto.MemberDto.LoginMemberInputDto;
@@ -10,11 +11,9 @@ import member.dto.MemberDto.LoginMemberOutputDto;
 import member.dto.MemberDto.RegisterMemberInputDto;
 import member.dto.MemberDto.UpdateMemberInfoForMemInputDto;
 import member.dto.MemberDto.ViewMemberInfoInputDto;
+import member.dto.MemberDto.ViewMemberInfoOutputDto;
 import member.service.MemberService;
 import session.Session;
-//=======
-import member.dto.MemberDto.*;
-import member.service.MemberService;
 import view.EndView;
 //>>>>>>> 95586a2b9e4bc747e9d5b51c586d7ece2aca0efd
 
@@ -55,7 +54,8 @@ public class MemberController {
 	 * 회원정보 조회
 	 */
 	public static void viewmeminfo(long userseq) {
-		memberService.viewMemberInfoForMem(new ViewMemberInfoInputDto(userseq));
+		ViewMemberInfoOutputDto op = memberService.viewMemberInfoForMem(new ViewMemberInfoInputDto(userseq));
+		System.out.println(op);
 	}
 	
 	/**

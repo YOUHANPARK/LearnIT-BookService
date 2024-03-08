@@ -36,3 +36,6 @@ select book_seq, book_title, call_number, publisher, author, loan_possible, dens
 SELECT * FROM
     (SELECT 책.*, DENSE_RANK() OVER(ORDER BY 책.book_title) AS rnum FROM 책 where book_title like '%스마트%')
 WHERE rnum >=1 and rnum<=10 ;
+
+insert into 도서추가요청 (request_date, request_status, addbook_title, addbook_author,publisher, user_seq) 
+values ((select sysdate from dual),'처리 중','test','test','test','85');

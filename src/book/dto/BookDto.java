@@ -102,17 +102,17 @@ public class BookDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("SearchBookByTitleOutputDto [bookseq=");
+			builder.append("[책 번호=");
 			builder.append(bookseq);
-			builder.append(", title=");
+			builder.append(", 책 제목=");
 			builder.append(title);
-			builder.append(", booknum=");
+			builder.append(", 청구기호=");
 			builder.append(booknum);
-			builder.append(", publisher=");
+			builder.append(", 출판사=");
 			builder.append(publisher);
-			builder.append(", author=");
+			builder.append(", 저자=");
 			builder.append(author);
-			builder.append(", bookposb=");
+			builder.append(", 대여가능여부=");
 			builder.append(bookposb);
 			builder.append("]");
 			return builder.toString();
@@ -221,6 +221,25 @@ public class BookDto {
 
 		public void setBookposb(int bookposb) {
 			this.bookposb = bookposb;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("[책 번호= ");
+			builder.append(bookseq);
+			builder.append(", 책 제목= ");
+			builder.append(title);
+			builder.append(", 청구 기호= ");
+			builder.append(callnum);
+			builder.append(", 출판사= ");
+			builder.append(publisher);
+			builder.append(", 저자= ");
+			builder.append(author);
+			builder.append(", 대여가능여부= ");
+			builder.append(bookposb);
+			builder.append("]");
+			return builder.toString();
 		}
 		
 		
@@ -656,6 +675,7 @@ public class BookDto {
 		int bookposb;
 		long userseq;
 		String cartname;
+		
 		public String getTitle() {
 			return title;
 		}
@@ -1122,7 +1142,7 @@ public class BookDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("ViewLoanHistoryOutputDto [title=");
+			builder.append("[title=");
 			builder.append(title);
 			builder.append(", booknum=");
 			builder.append(booknum);
@@ -1145,24 +1165,27 @@ public class BookDto {
 	
 	public static class RecommendBookInputDto{
 		long userseq;
-		long ratingseq;
 		
+		public RecommendBookInputDto() {
+			
+		}
+
+		public RecommendBookInputDto(long userseq) {
+			
+			this.userseq = userseq;
+		}
 		public long getUserseq() {
 			return userseq;
 		}
 		public void setUserseq(long userseq) {
 			this.userseq = userseq;
 		}
-		public long getRatingseq() {
-			return ratingseq;
-		}
-		public void setRatingseq(long ratingseq) {
-			this.ratingseq = ratingseq;
-		}
+		
 		
 		
 	}
 	public static class RecommendBookOutputDto{
+		int score;
 		String title;
 		String booknum;
 		String publisher;
@@ -1174,9 +1197,10 @@ public class BookDto {
 			super();
 		}
 
-		public RecommendBookOutputDto(String title, String booknum, String publisher, String author, Date pubyear,
+		public RecommendBookOutputDto(int score, String title, String booknum, String publisher, String author, Date pubyear,
 				int bookposb) {
 			super();
+			this.score = score;
 			this.title = title;
 			this.booknum = booknum;
 			this.publisher = publisher;
@@ -1232,6 +1256,15 @@ public class BookDto {
 		public void setBookposb(int bookposb) {
 			this.bookposb = bookposb;
 		}
+
+		@Override
+		public String toString() {
+		    String loanStatus = bookposb == 1 ? "가능" : "불가능";
+		    return String.format("별점 = %-4s, 제목 = %-25s, 청구기호 = %-8s, 출판사 = %-15s, 작가 = %-4s, 출판연도 = %-4s, 대여가능여부 = %-3s",
+		                         score, title, booknum, publisher, author, pubyear, loanStatus);
+		}
+
+
 		
 	}
 	

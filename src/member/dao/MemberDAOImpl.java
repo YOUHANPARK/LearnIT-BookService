@@ -81,8 +81,8 @@ public class MemberDAOImpl implements MemberDAO {
 	// 회원 가입
 	@Override
 	public void registerMember(RegisterMemberInputDto member) {
-		String sql = "INSERT INTO 회원 (NAME, TEL, ADDR, EMAIL, PASSWORD, JOIN_DATE, STATE) "
-				+ "VALUES (?, ?, ?, ?, ?, SYSDATE, ?)";
+		String sql = "INSERT INTO 회원 (NAME, TEL, ADDR, EMAIL, PASSWORD, JOIN_DATE, STATE, CATEGORY) "
+				+ "VALUES (?, ?, ?, ?, ?, SYSDATE, ?, ?)";
 
 		try (Connection conn = DBUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -92,6 +92,7 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.setString(4, member.getEmail());
 			pstmt.setString(5, member.getPassword());
 			pstmt.setString(6, "ACTIVE");
+			pstmt.setString(7, member.getCategory());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
