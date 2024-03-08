@@ -95,7 +95,7 @@ public class MenuView {
 				ip.setBookseq(bookseq);
 				BookController.SearchBookBySeq(ip);
 				
-				return;
+				break;
 				
 			case 3:
 				MenuView.menu();// 뒤로가기
@@ -456,8 +456,9 @@ public class MenuView {
 	 */
 	public static void userInfoMenu(Session session) {
 		while (true) {
-			System.out.println(" " + "1. 회원정보 조회   |   2. 회원정보 수정   |  3. ID 찾기   |   4. PASSWORD 찾기   |   5. 뒤로 가기");
-
+//			System.out.println(" " + "1. 회원정보 조회   |   2. 회원정보 수정   |  3. ID 찾기   |   4. PASSWORD 찾기   |   5. 뒤로 가기");
+			System.out.println("                   " + "1. 회원정보 조회   |   2. 회원정보 수정   |  3. 뒤로 가기"+"                   " );
+			
 			System.out.print("메뉴를 선택해주세요: ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -469,15 +470,15 @@ public class MenuView {
 				MenuView.updatememinfo(session);// 회원정보 수정
 				break;
 			
-			case 3:
-				MenuView.findEmail();// ID 찾기
-				break;
-			
-			case 4:
-				MenuView.findPassword();//비밀번호 찾기
-				break;
+//			case 3:
+//				MenuView.findEmail();// ID 찾기
+//				break;
+//			
+//			case 4:
+//				MenuView.findPassword();//비밀번호 찾기
+//				break;
 				
-			case 5:
+			case 3:
 				MenuView.printUserMenu(session);// 뒤로가기
 				break;
 			}

@@ -373,7 +373,7 @@ public class BookDto {
 			builder.append(author);
 			builder.append(", 책 소개 = ");
 			builder.append(intro);
-			builder.append(", bookposb = ");
+			builder.append(", 대여 가능 여부 = ");
 			builder.append(bookposb);
 			builder.append(", 출판연도 = ");
 			builder.append(pubyear);
@@ -1155,19 +1155,19 @@ public class BookDto {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("[title=");
+			builder.append("[책 제목 = ");
 			builder.append(title);
-			builder.append(", booknum=");
+			builder.append(", 청구 기호 = ");
 			builder.append(booknum);
-			builder.append(", publisher=");
+			builder.append(", 출판사 = ");
 			builder.append(publisher);
-			builder.append(", author=");
+			builder.append(", 저자 = ");
 			builder.append(author);
-			builder.append(", pubyear=");
+			builder.append(", 발행연도 = ");
 			builder.append(pubyear);
-			builder.append(", loandate=");
+			builder.append(", 대출 일자 = ");
 			builder.append(loandate);
-			builder.append(", returndate=");
+			builder.append(", 반납 일자 =");
 			builder.append(returndate);
 			builder.append("]");
 			return builder.toString();
